@@ -7,6 +7,6 @@ import { ResourceService } from './services/resourses.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor ( private resours: ResourceService ) { }
+  constructor ( private _resours: ResourceService ) { }
   
 }

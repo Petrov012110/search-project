@@ -1,0 +1,16 @@
+<div class="search-wrapp">
+    <div class="search__inner">
+
+        <div class="search__inner-input">
+            <div [formGroup]="inputForm">
+                <input type="text" formControlName="inputControl">
+                <button (click)="getData()" type="submit" class="btn-search">
+                    Поиск
+                    <span class="material-icons">search</span> 
+                </button>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
