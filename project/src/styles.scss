@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    background: #fff;
+    color: #333;
+  }
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+  
+    &:hover {
+      color: #666;
+    }
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  
+  input {
+    display: block;
+    width: 100%;
+    padding: .4rem;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    outline: none;
+    margin-right: 10px;
+  }
+  
+  .container {
+    max-width: 1400px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 2rem;
+  }

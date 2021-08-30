@@ -1,0 +1,10 @@
+.container{
+    &__inner{
+        display: flex;
+        justify-content: space-between;
+        padding-top: 20px;
+    }
+}
+.filter{
+    width: 400px;
+}
