@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LocalStorageService } from 'src/app/services/localStorage.service';
+import { ManagerService } from '../../services/manager.service';
 
 @Component({
   selector: 'app-content',
@@ -9,14 +9,22 @@ import { LocalStorageService } from 'src/app/services/localStorage.service';
 })
 export class ContentComponent implements OnInit {
 
-  constructor(private _storage: LocalStorageService) { }
+  constructor(private _managerService: ManagerService) { }
 
   history: object[] = [];
   historySub!: Subscription;
 
-  public ngOnInit(): void {
-    
-      
+  ngOnInit(): void {
+    this.subscribeOnServerAnswerEvent();
+  }
+
+  private subscribeOnServerAnswerEvent(): void {
+    this._managerService.onServerAnswerEvent
+      .subscribe(res => {
+        this.history.push(res);
+        console.log(this.history);
+        
+      });
   }
 
 

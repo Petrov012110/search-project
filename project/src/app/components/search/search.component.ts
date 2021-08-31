@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { IGitData, ITwitchData, IWikiData, TTableData } from 'src/environments/interface';
 import { LocalStorageService } from '../../services/localStorage.service';
 import { ManagerService } from '../../services/manager.service';
 import { ResourceService } from '../../services/resourses.service';
@@ -29,40 +30,38 @@ export class SearchComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
 
-  }
-
-  public writeData(obj: object) {
-    this.arrData.push(obj)
   }
 
   public getData(): void {
 
-    console.log(this.inputForm.controls['inputControl'].value);
+    // console.log(this.inputForm.controls['inputControl'].value);
 
-    this._storage.setHistoryToLocalStorage(this.inputForm.controls['inputControl'].value)
+    this._storage.setHistoryToLocalStorage(this.inputForm.controls['inputControl'].value);
     this._managerService.onSearchEvent.next(this.inputForm.controls['inputControl'].value);
 
 
-    let obj: object[] = [];
+    let obj: TTableData = {
+      twitch: [],
+      git: [],
+      wiki: []
+    };
 
-    this._resours.getTwitchData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element: object) => {
-      obj.push(element)
+    this._resours.getTwitchData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element: ITwitchData) => {
+      obj.twitch.push(element)
     }));
-    this._resours.getGitData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element: object) => {
-      obj.push(element)
+    this._resours.getGitData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element: IGitData) => {
+      obj.git.push(element)
     }));
-    this._resours.getWikiData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element: object) => {
-      obj.push(element)
+    this._resours.getWikiData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element: IWikiData) => {
+      obj.wiki.push(element)
     }));
 
-    console.log(obj);
+    this._managerService.onServerAnswerEvent.next(obj)
 
-  }
+    // console.log(obj);
 
-  public createArr(text: string): string[] {
-    return text.split(" ")
   }
 
 }

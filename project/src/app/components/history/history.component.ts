@@ -9,16 +9,20 @@ import { ManagerService } from 'src/app/services/manager.service';
 })
 export class HistoryComponent implements OnInit {
 
+  arrOfInputValue: string[] = [];
+
   constructor(
     private _storage: LocalStorageService,
     private _managerService: ManagerService
   ) {
+
     this._storage.getHistoryFromLocalStorage().subscribe(data => {
-      console.log(data);
+      data.forEach(element => {
+        this.arrOfInputValue.push(element);
+      });
 
-    })
+    });
   }
-
 
   ngOnInit(): void {
     this.subscribeOnSearchEvent();
@@ -27,8 +31,10 @@ export class HistoryComponent implements OnInit {
   private subscribeOnSearchEvent(): void {
     this._managerService.onSearchEvent
       .subscribe(res => {
-        console.log((res));
-      })
+        this.arrOfInputValue.push(this._storage.cutInputValue((res)));
+      });
   }
+
+
 
 }

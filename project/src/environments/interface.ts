@@ -22,7 +22,9 @@ export interface ITwitchToken {
 }
 
 export interface IGitData {
-    html_url?: string
+    html_url?: string,
+    id: number,
+    number: string
 }
 
 export interface IGitResponse {
@@ -46,4 +48,10 @@ export interface IWikiResponse {
     query : {
         search: IWikiData[]
     }
+}
+
+export type TTableData = {
+    twitch: ITwitchData[],
+    git: IGitData[],
+    wiki: IWikiData[]
 }

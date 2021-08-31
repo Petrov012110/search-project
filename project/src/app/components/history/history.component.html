@@ -1,1 +1,12 @@
-<p>history works!</p>
+<table>
+    <thead>
+        <tr>
+            <th>История</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of arrOfInputValue; let idx = index">
+            <td>{{i}}</td>
+        </tr>
+    </tbody>
+</table>
