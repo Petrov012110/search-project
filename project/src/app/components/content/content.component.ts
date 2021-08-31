@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
 
 @Component({
   selector: 'app-content',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _storage: LocalStorageService) { }
 
-  ngOnInit(): void {
+  history: object[] = [];
+  historySub!: Subscription;
+
+  public ngOnInit(): void {
+    
+      
   }
+
+
+  
 
 }

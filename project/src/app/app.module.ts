@@ -11,6 +11,8 @@ import { InformationComponent } from './components/filter/information/informatio
 import { SortingComponent } from './components/filter/sorting/sorting.component';
 import { ResourceService } from './services/resourses.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LocalStorageService } from './services/localStorage.service';
+import { ManagerService } from './services/manager.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,11 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ResourceService],
+  providers: [
+    ResourceService,
+    LocalStorageService,
+    ManagerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

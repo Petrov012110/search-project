@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { LocalStorageService } from '../../services/localStorage.service';
+import { ManagerService } from '../../services/manager.service';
 import { ResourceService } from '../../services/resourses.service';
 
 @Component({
@@ -8,12 +10,18 @@ import { ResourceService } from '../../services/resourses.service';
   styleUrls: ['./style/search.component.scss']
 })
 export class SearchComponent implements OnInit {
+
+
   text: string = "";
   inputForm: FormGroup;
   arrData: object[] = []
 
 
-  constructor(private _resours: ResourceService) { 
+  constructor(
+    private _resours: ResourceService,
+    private _storage: LocalStorageService,
+    private _managerService: ManagerService
+  ) {
 
     this.inputForm = new FormGroup({
       "inputControl": new FormControl("")
@@ -22,7 +30,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   public writeData(obj: object) {
@@ -32,9 +40,13 @@ export class SearchComponent implements OnInit {
   public getData(): void {
 
     console.log(this.inputForm.controls['inputControl'].value);
-    
+
+    this._storage.setHistoryToLocalStorage(this.inputForm.controls['inputControl'].value)
+    this._managerService.onSearchEvent.next(this.inputForm.controls['inputControl'].value);
+
+
     let obj: object[] = [];
-    
+
     this._resours.getTwitchData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element: object) => {
       obj.push(element)
     }));
@@ -46,7 +58,7 @@ export class SearchComponent implements OnInit {
     }));
 
     console.log(obj);
-    
+
   }
 
   public createArr(text: string): string[] {
