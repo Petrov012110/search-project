@@ -22,9 +22,10 @@ export interface ITwitchToken {
 }
 
 export interface IGitData {
-    html_url?: string,
+    html_url: string,
     id: number,
-    number: string
+    number: string,
+    name: string
 }
 
 export interface IGitResponse {
@@ -50,8 +51,20 @@ export interface IWikiResponse {
     }
 }
 
-export type TTableData = {
+export type TResourseData = {
     twitch: ITwitchData[],
     git: IGitData[],
     wiki: IWikiData[]
+}
+
+export interface ITable{
+    name?: string,
+    content?: string,
+    resourse?: string
+}
+
+export enum ResoureseOfResponse {
+    git = 0,
+    wiki = 1,
+    twitch = 2
 }

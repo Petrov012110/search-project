@@ -1,10 +1,22 @@
 <table>
-    <tbody>
-        <tr *ngFor="let answer of history; let idx = index">
-
-                <td>{{idx + 1}}</td>
-                <td>{{answer}}</td>
-
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>title</th>
+            <th>content</th>
+            <th>resousre</th>
         </tr>
+    </thead>
+    <tbody>
+        <!-- <ng-template *ngIf="wiki"> -->
+            <tr *ngFor="let i of tableData; let idx = index">
+    
+                    <td>{{idx + 1}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.content}}</td>
+                    <td>{{i.resourse}}</td>
+    
+            </tr>
+        <!-- </ng-template> -->
     </tbody>
 </table>

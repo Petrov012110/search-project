@@ -4,6 +4,8 @@ import { Observable, of } from "rxjs";
 import { environment } from "src/environments/environment";
 import { IGitResponse, ITwitchResponse, ITwitchToken, IWikiResponse } from "src/environments/interface";
 import { tap, map, catchError } from 'rxjs/operators';
+import { GitResponseModel } from "../models/git-model/git.response-model";
+import { GitModel } from "../models/git-model/git.model";
 // import { RequestOptions } from "https";
 
 @Injectable()
@@ -58,29 +60,36 @@ export class ResourceService {
 
     }
 
-    public getGitData(data: string) {
+    public getGitData(data: string): Observable<GitModel[]> {
 
         return this.http.get<IGitResponse>(`https://api.github.com/search/repositories?q=${data}`)
-                        .pipe(
-                            map(response => response.items),
-                            catchError(error => {
-                                console.log('error: ', error);
-                                return of(error);
-                            })
-                        )
-        
+            .pipe(
+                map((response: GitResponseModel): GitModel[] => {
+                    // const model: GitModel[] = [];
+                    // response.items.forEach((item: GitModel): void => {
+                    //     model.push(item)
+                    // })
+                    // return model;
+                    return response.items.map(item => new GitModel(item))
+                }),
+                catchError(error => {
+                    console.log('error: ', error);
+                    return of(error);
+                })
+            )
+
     }
 
     public getWikiData(data: string) {
 
         return this.http.get<IWikiResponse>(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&origin=*&srsearch=${data}`)
-                        .pipe(
-                            map(response => response.query.search),
-                            catchError(error => {
-                                console.log('error: ', error);
-                                return of(error);
-                            })
-                        )
+            .pipe(
+                map(response => response.query.search),
+                catchError(error => {
+                    console.log('error: ', error);
+                    return of(error);
+                })
+            )
     }
 
 }
