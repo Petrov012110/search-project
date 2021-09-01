@@ -6,6 +6,8 @@ import { IGitResponse, ITwitchResponse, ITwitchToken, IWikiResponse } from "src/
 import { tap, map, catchError } from 'rxjs/operators';
 import { GitResponseModel } from "../models/git-model/git.response-model";
 import { GitModel } from "../models/git-model/git.model";
+import { WikiResponseModel } from "../models/wiki-model/wiki.response-model";
+import { WikiModel } from "../models/wiki-model/wiki.model";
 // import { RequestOptions } from "https";
 
 @Injectable()
@@ -65,11 +67,6 @@ export class ResourceService {
         return this.http.get<IGitResponse>(`https://api.github.com/search/repositories?q=${data}`)
             .pipe(
                 map((response: GitResponseModel): GitModel[] => {
-                    // const model: GitModel[] = [];
-                    // response.items.forEach((item: GitModel): void => {
-                    //     model.push(item)
-                    // })
-                    // return model;
                     return response.items.map(item => new GitModel(item))
                 }),
                 catchError(error => {
@@ -80,11 +77,13 @@ export class ResourceService {
 
     }
 
-    public getWikiData(data: string) {
+    public getWikiData(data: string): Observable<WikiModel[]> {
 
         return this.http.get<IWikiResponse>(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&origin=*&srsearch=${data}`)
             .pipe(
-                map(response => response.query.search),
+                map((response: WikiResponseModel): WikiModel[] => {
+                    return response.query.search.map(item => new WikiModel(item))
+                }),
                 catchError(error => {
                     console.log('error: ', error);
                     return of(error);

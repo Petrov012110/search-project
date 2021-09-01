@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { GitViewModel } from 'src/app/models/git-model/git.view-model';
+import { WikiViewModel } from 'src/app/models/wiki-model/wiki.view-model';
 import { IGitData, ITwitchData, IWikiData} from 'src/environments/interface';
 import { LocalStorageService } from '../../services/localStorage.service';
 import { ManagerService } from '../../services/manager.service';
@@ -53,14 +54,11 @@ export class SearchComponent implements OnInit {
     //   obj.twitch.push(element)
     // }));
     this._resours.getGitData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element) => {
-      console.log(element);
-      
-      let newElement = new GitViewModel(element)
-      console.log("VIEW_MODEL", newElement);
+      let newGitElement = new GitViewModel(element)
     }));
-    // this._resours.getWikiData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element: IWikiData) => {
-    //   obj.wiki.push(element)
-    // }));
+    this._resours.getWikiData(this.inputForm.controls['inputControl'].value).subscribe(el => el.forEach((element) => {
+      let newWikiElement = new WikiViewModel(element)
+    }));
 
     // this._managerService.onServerAnswerEvent.next(obj)
 
