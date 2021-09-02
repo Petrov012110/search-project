@@ -5,14 +5,16 @@ export interface IEniroment {
 }
 
 export interface ITwitchData {
-    box_art_url?: string
-    id?: string
-    name?: string
+    box_art_url: string
+    id: string
+    name: string
 }
 
 export interface ITwitchResponse {
     data: ITwitchData[],
-    pagination: object
+    pagination: {
+        cursor: string
+    }
 }
 
 export interface ITwitchToken {
@@ -164,3 +166,5 @@ export enum ResoureseOfResponse {
     wiki = 1,
     twitch = 2
 }
+
+

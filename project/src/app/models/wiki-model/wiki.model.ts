@@ -6,7 +6,15 @@ export class WikiModel {
     public title!: string;
 
     constructor(data: IWikiData) {
-        this.snippet = data.snippet;
-        this.title = data.title;
+        if(data) {
+            this.snippet = this.creteText(data.snippet) ;
+            this.title = data.title;
+        }
+    }
+
+    public creteText(value: string): string {
+        let div = document.createElement("div")
+        div.innerHTML = value
+        return div.innerText
     }
 }

@@ -8,6 +8,8 @@ import { GitResponseModel } from "../models/git-model/git.response-model";
 import { GitModel } from "../models/git-model/git.model";
 import { WikiResponseModel } from "../models/wiki-model/wiki.response-model";
 import { WikiModel } from "../models/wiki-model/wiki.model";
+import { TwitchResponseModel } from "../models/twitch-model/twitch.response-model";
+import { TwitchModel } from "../models/twitch-model/twitch.model";
 // import { RequestOptions } from "https";
 
 @Injectable()
@@ -26,7 +28,7 @@ export class ResourceService {
     //     return localStorage.getItem("twitch-token");
     // }
 
-    public getTwitchData(data: string) {
+    public getTwitchData(data: string): Observable<TwitchModel[]> {
 
         return this.http.get<ITwitchResponse>(`https://api.twitch.tv/helix/search/categories?query=${data}`, {
             headers: {
@@ -34,7 +36,9 @@ export class ResourceService {
                 "Authorization": `Bearer ${this._token}`
             }
         }).pipe(
-            map(response => response.data),
+            map((response: TwitchResponseModel): TwitchModel[] => {
+                return response.data.map(item => new TwitchModel(item))
+            }),
             catchError(error => {
                 console.log('error: ', error);
                 return of(error);
