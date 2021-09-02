@@ -8,4 +8,5 @@ export class ManagerService {
 
     public onSearchEvent: Subject<string> = new Subject<string>();
     public onServerAnswerEvent: Subject<ITable[]> = new Subject<ITable[]>();
+    public onCheckboxEvent: Subject<string[]> = new Subject<string[]>();
 }

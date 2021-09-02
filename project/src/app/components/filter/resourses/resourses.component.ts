@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ManagerService } from 'src/app/services/manager.service';
 import { CheckboxItem } from './checkboxItem';
 
 @Component({
@@ -8,18 +9,33 @@ import { CheckboxItem } from './checkboxItem';
 })
 export class ResoursesComponent implements OnInit {
 
+  options = Array<CheckboxItem>();
+  toggle = new EventEmitter<string[]>();
+
   private userRoles = [
-    { id: 1, name: `Wiki` },
-    { id: 2, name: `Git` },
-    { id: 3, name: `Twitch` },
+    { id: 0, name: `Wiki` },
+    { id: 1, name: `Git` },
+    { id: 2, name: `Twitch` },
   ];
 
-  public userRolesOptions = new Array<CheckboxItem>();
+  public selectedValues: string[] = []
 
-  constructor() { }
+  constructor(
+    private _managerService: ManagerService
+  ) { }
 
   ngOnInit(): void {
-    this.userRolesOptions = this.userRoles.map(x => new CheckboxItem(x.id, x.name))
+    this.options = this.userRoles.map(x => new CheckboxItem(x.id, x.name))
   }
+
+  onToggle() {
+    const checkedOptions = this.options.filter(x => x.checked);
+    this.selectedValues = checkedOptions.map(x => x.value);
+    this._managerService.onCheckboxEvent.next(this.selectedValues)
+    // console.log(this.selectedValues);
+  }
+
+
+
 
 }
