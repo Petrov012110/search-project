@@ -15,18 +15,11 @@ import { TwitchModel } from "../models/twitch-model/twitch.model";
 @Injectable()
 export class ResourceService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { 
+        
+    }
 
     private _token = "a125z72n3jrid8bqrlyxccqb8xlzaz"
-
-    // get token() {
-    //     let expDate = new Date(<string>localStorage.getItem("twitch-token-expires"));
-    //     if (new Date() > expDate) {
-    //         this.getTwitchToken();
-    //         return null
-    //     }
-    //     return localStorage.getItem("twitch-token");
-    // }
 
     public getTwitchData(data: string): Observable<TwitchModel[]> {
 
@@ -45,19 +38,6 @@ export class ResourceService {
             })
         )
     }
-
-    // public getTwitchToken(): Observable<any> {
-
-    //     const params = new HttpParams()
-    //         .set("client_id", `${environment.clientId}`)
-    //         .set("client_secret", `${environment.client_secret}`)
-    //         .set("grant_type", "client_credentials");
-
-    //     return this.http.post<ITwitchToken>(`https://id.twitch.tv/oauth2/token?client_id=u4bc8k2muq2vms0dw3n1seg1acmsmm&client_secret=qidntfvbud0od92iw9y98ksklckrl2&grant_type=client_credentials`, null)
-    //         .pipe(
-    //             tap(this.setToken)
-    //         )
-    // }
 
     private setToken(response: ITwitchToken) {
         let expiresDate = new Date(new Date().getTime() + +response.expires_in * 1000);

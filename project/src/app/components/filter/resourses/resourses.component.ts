@@ -9,10 +9,15 @@ import { CheckboxItem } from './checkboxItem';
 })
 export class ResoursesComponent implements OnInit {
 
-  options = Array<CheckboxItem>();
+  public options = Array<CheckboxItem>();
+
+  @Input()
+  public checkboxList!: CheckboxItem[]
+
+  @Output()
   toggle = new EventEmitter<string[]>();
 
-  private userRoles = [
+  private checkboxObject = [
     { id: 0, name: `Wiki` },
     { id: 1, name: `Git` },
     { id: 2, name: `Twitch` },
@@ -20,22 +25,18 @@ export class ResoursesComponent implements OnInit {
 
   public selectedValues: string[] = []
 
-  constructor(
-    private _managerService: ManagerService
-  ) { }
+  constructor() {
 
-  ngOnInit(): void {
-    this.options = this.userRoles.map(x => new CheckboxItem(x.id, x.name))
   }
 
-  onToggle() {
+  public ngOnInit(): void {
+    this.options = this.checkboxObject.map(x => new CheckboxItem(x.id, x.name))
+  }
+
+  public onToggle() {
     const checkedOptions = this.options.filter(x => x.checked);
     this.selectedValues = checkedOptions.map(x => x.value);
-    this._managerService.onCheckboxEvent.next(this.selectedValues)
-    // console.log(this.selectedValues);
+    this.toggle.emit(checkedOptions.map(x => x.value));
   }
-
-
-
 
 }

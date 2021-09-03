@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { ManagerService } from 'src/app/services/manager.service';
+import { ResourceService } from 'src/app/services/resourses.service';
 
 @Component({
   selector: 'app-history',
@@ -13,7 +14,8 @@ export class HistoryComponent implements OnInit {
 
   constructor(
     private _storage: LocalStorageService,
-    private _managerService: ManagerService
+    private _managerService: ManagerService,
+    private _resours: ResourceService
   ) {
 
     this._storage.getHistoryFromLocalStorage().subscribe(data => {
@@ -33,6 +35,11 @@ export class HistoryComponent implements OnInit {
       .subscribe(res => {
         this.arrOfInputValue.push(this._storage.cutInputValue((res)));
       });
+  }
+
+  public getValue($event: any): void {
+    console.log($event.target.innerText);
+    
   }
 
 

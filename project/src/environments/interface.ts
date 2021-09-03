@@ -167,4 +167,9 @@ export enum ResoureseOfResponse {
     twitch = 2
 }
 
+export interface ICheckboxes {
+    id: number,
+    name: string
+}
+
 
