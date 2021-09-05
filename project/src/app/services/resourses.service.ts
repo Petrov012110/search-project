@@ -2,15 +2,19 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { environment } from "src/environments/environment";
-import { IGitResponse, ITwitchResponse, ITwitchToken, IWikiResponse } from "src/environments/interface";
+import { IGitRepositoriesResponse, IGitUsersResponse, ITwitchChanelResponse, ITwitchResponse, ITwitchToken, IWikiResponse } from "src/environments/interface";
 import { tap, map, catchError } from 'rxjs/operators';
-import { GitResponseModel } from "../models/git-model/git.response-model";
-import { GitModel } from "../models/git-model/git.model";
+import { GitRepositoryResponseModel } from "../models/gitRepository-model/git.response-model";
+import { GitRepositoryModel } from "../models/gitRepository-model/git.model";
 import { WikiResponseModel } from "../models/wiki-model/wiki.response-model";
 import { WikiModel } from "../models/wiki-model/wiki.model";
-import { TwitchResponseModel } from "../models/twitch-model/twitch.response-model";
-import { TwitchModel } from "../models/twitch-model/twitch.model";
-// import { RequestOptions } from "https";
+import { TwitchCategoryResponseModel } from "../models/twitchCategory-model/twitchCategory.response-model";
+import { TwitchCategoryModel } from "../models/twitchCategory-model/twitchCategory.model";
+import { TwitchChanelResponseModel } from "../models/twitchChanels-model/twitchChanel.response-model";
+import { TwitchChanelModel } from "../models/twitchChanels-model/twitchChanel.model";
+import { GitUserResponseModel } from "../models/gitUser-model/gitUser.response-model";
+import { GitUserModel } from "../models/gitUser-model/gitUser.model";
+
 
 @Injectable()
 export class ResourceService {
@@ -19,9 +23,9 @@ export class ResourceService {
         
     }
 
-    private _token = "a125z72n3jrid8bqrlyxccqb8xlzaz"
+    private _token = "qs1zvwtakojmcfrmoxjcszqhbli32m"
 
-    public getTwitchData(data: string): Observable<TwitchModel[]> {
+    public getTwitchCategories(data: string): Observable<TwitchCategoryModel[]> {
 
         return this.http.get<ITwitchResponse>(`https://api.twitch.tv/helix/search/categories?query=${data}`, {
             headers: {
@@ -29,12 +33,26 @@ export class ResourceService {
                 "Authorization": `Bearer ${this._token}`
             }
         }).pipe(
-            map((response: TwitchResponseModel): TwitchModel[] => {
-                return response.data.map(item => new TwitchModel(item))
+            map((response: TwitchCategoryResponseModel): TwitchCategoryModel[] => {
+                return response.data.map(item => new TwitchCategoryModel(item))
             }),
             catchError(error => {
                 console.log('error: ', error);
                 return of(error);
+            })
+        )
+    }
+
+    public getTwitchChannels(data: string): Observable<TwitchChanelModel[]> {
+
+        return this.http.get<ITwitchChanelResponse>(`https://api.twitch.tv/helix/search/channels?query=${data}`, {
+            headers: {
+                "Client-Id": `${environment.clientId}`,
+                "Authorization": `Bearer ${this._token}`
+            }
+        }).pipe(
+            map((response: TwitchChanelResponseModel): TwitchChanelModel[] => {
+                return response.data.map(item => new TwitchChanelModel(item))
             })
         )
     }
@@ -46,12 +64,27 @@ export class ResourceService {
 
     }
 
-    public getGitData(data: string): Observable<GitModel[]> {
+    public getGitRepositories(data: string): Observable<GitRepositoryModel[]> {
 
-        return this.http.get<IGitResponse>(`https://api.github.com/search/repositories?q=${data}`)
+        return this.http.get<IGitRepositoriesResponse>(`https://api.github.com/search/repositories?q=${data}`)
             .pipe(
-                map((response: GitResponseModel): GitModel[] => {
-                    return response.items.map(item => new GitModel(item))
+                map((response: GitRepositoryResponseModel): GitRepositoryModel[] => {
+                    return response.items.map(item => new GitRepositoryModel(item))
+                }),
+                catchError(error => {
+                    console.log('error: ', error);
+                    return of(error);
+                })
+            )
+
+    }
+
+    public getGitUsers(data: string): Observable<GitUserModel[]> {
+
+        return this.http.get<IGitUsersResponse>(`https://api.github.com/search/users?q=${data}`)
+            .pipe(
+                map((response: GitUserResponseModel): GitUserModel[] => {
+                    return response.items.map(item => new GitUserModel(item))
                 }),
                 catchError(error => {
                     console.log('error: ', error);

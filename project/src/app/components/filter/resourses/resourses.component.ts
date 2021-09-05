@@ -1,42 +1,37 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { ManagerService } from 'src/app/services/manager.service';
-import { CheckboxItem } from './checkboxItem';
+import { CheckboxModel } from '../models/checkbox.model';
 
 @Component({
   selector: 'app-resourses',
   templateUrl: './resourses.component.html',
   styleUrls: ['./style/resourses.component.scss']
 })
-export class ResoursesComponent implements OnInit {
+export class ResoursesComponent implements DoCheck{
 
-  public options = Array<CheckboxItem>();
+  public options = Array<CheckboxModel>();
+
+  public isDisabled: boolean = true;
 
   @Input()
-  public checkboxList!: CheckboxItem[]
+  public checkboxList!: CheckboxModel[];
 
-  @Output()
-  toggle = new EventEmitter<string[]>();
+  public selectedValues: string[] = [];
 
-  private checkboxObject = [
-    { id: 0, name: `Wiki` },
-    { id: 1, name: `Git` },
-    { id: 2, name: `Twitch` },
-  ];
-
-  public selectedValues: string[] = []
-
-  constructor() {
+  constructor(private _managerService: ManagerService) {
 
   }
 
-  public ngOnInit(): void {
-    this.options = this.checkboxObject.map(x => new CheckboxItem(x.id, x.name))
+  public ngDoCheck(): void {
+
   }
 
-  public onToggle() {
-    const checkedOptions = this.options.filter(x => x.checked);
-    this.selectedValues = checkedOptions.map(x => x.value);
-    this.toggle.emit(checkedOptions.map(x => x.value));
+  public onToggle(node: CheckboxModel, event: Event) {
+
+    this._managerService.onCheckboxEvent.next(this.checkboxList)
+    
   }
+
+ 
 
 }

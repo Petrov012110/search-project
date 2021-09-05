@@ -1,13 +1,13 @@
-import { IGitData } from "src/environments/interface";
-import { GitResponseModel } from "./git.response-model";
+import { IGitRepositoryData } from "src/environments/interface";
+import { GitRepositoryResponseModel } from "./git.response-model";
 
 
-export class GitModel {
+export class GitRepositoryModel {
     public html_url!: string;
     public id!: number;
     public name!: string;
 
-    constructor(data: IGitData) {
+    constructor(data: IGitRepositoryData) {
         if (data) {
             this.html_url = data.html_url;
             this.id = data.id;

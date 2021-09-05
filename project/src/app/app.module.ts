@@ -13,6 +13,8 @@ import { ResourceService } from './services/resourses.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from './services/localStorage.service';
 import { ManagerService } from './services/manager.service';
+import { TreeModule } from '@circlon/angular-tree-component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ManagerService } from './services/manager.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TreeModule
+    
   ],
   providers: [
     ResourceService,

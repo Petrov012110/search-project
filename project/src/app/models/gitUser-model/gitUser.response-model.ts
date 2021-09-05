@@ -1,11 +1,11 @@
-import { IGitData, IGitResponse } from "../../../environments/interface";
+import { IGitUserData, IGitUsersResponse } from "src/environments/interface";
 
-export class GitResponseModel {
+export class GitUserResponseModel {
     public incomplete_results: boolean = false;
-    public items: IGitData[] = [];
+    public items: IGitUserData[] = [];
     public total_count!: number;
 
-    constructor(data: IGitResponse) {
+    constructor(data: IGitUsersResponse) {
         if (data) {
             this.incomplete_results = data.incomplete_results;
             this.items = data.items;

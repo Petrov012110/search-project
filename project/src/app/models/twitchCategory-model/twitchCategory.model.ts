@@ -1,6 +1,6 @@
 import { ITwitchData } from "src/environments/interface";
 
-export class TwitchModel {
+export class TwitchCategoryModel {
     public box_art_url!: string
     public id!: string
     public name!: string

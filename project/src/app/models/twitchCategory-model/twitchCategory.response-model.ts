@@ -1,6 +1,6 @@
 import { ITwitchData, ITwitchResponse } from "../../../environments/interface"
 
-export class TwitchResponseModel {
+export class TwitchCategoryResponseModel {
     public data!: ITwitchData[];
     public pagination!: object;
 

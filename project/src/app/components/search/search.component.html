@@ -2,12 +2,15 @@
     <div class="search__inner">
 
         <div class="search__inner-input">
-            <div [formGroup]="inputForm">
+            <div class="inputForm" [formGroup]="inputForm">
                 <input type="text" formControlName="inputControl">
-                <button (click)="getData()" type="submit" class="btn-search">
+                <button [disabled]="!validator()" (click)="getData()" type="submit" class="btn-search">
                     Поиск
                     <span class="material-icons">search</span> 
                 </button>
+            </div>
+            <div *ngIf="!validator()" class="validation">
+                <small>{{errorMessage}}</small>
             </div>
             
         </div>

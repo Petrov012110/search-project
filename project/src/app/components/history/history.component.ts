@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { ManagerService } from 'src/app/services/manager.service';
 import { ResourceService } from 'src/app/services/resourses.service';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-history',
@@ -15,7 +16,6 @@ export class HistoryComponent implements OnInit {
   constructor(
     private _storage: LocalStorageService,
     private _managerService: ManagerService,
-    private _resours: ResourceService
   ) {
 
     this._storage.getHistoryFromLocalStorage().subscribe(data => {
@@ -33,15 +33,15 @@ export class HistoryComponent implements OnInit {
   private subscribeOnSearchEvent(): void {
     this._managerService.onSearchEvent
       .subscribe(res => {
+        if(this.arrOfInputValue.length+1 > 15) {
+          this.arrOfInputValue.splice(0, 1);
+        }
         this.arrOfInputValue.push(this._storage.cutInputValue((res)));
       });
   }
 
   public getValue($event: any): void {
-    console.log($event.target.innerText);
-    
+    this._managerService.onHistoryEvent.next($event.target.innerText)
   }
-
-
 
 }

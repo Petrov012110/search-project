@@ -9,7 +9,7 @@ export class LocalStorageService {
         const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
         const isHistoryMaxed = history.length === maxHistoryLength;
         const workingHistory = isHistoryMaxed ? history.slice(1) : history;
-        const updatedHistory = workingHistory.concat(this.cutInputValue(searchParam));
+        const updatedHistory = workingHistory.concat(searchParam);
 
         localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
     }

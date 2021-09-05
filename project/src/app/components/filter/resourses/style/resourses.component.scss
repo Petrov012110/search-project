@@ -1,8 +1,17 @@
-li{
+.chekboxes{
+
+    max-width: 300px;
+    padding-bottom: 20px;
+
+}
+
+.checkboxes-inner{
+    padding-left: 20px;
+}
+
+.wrapp{
     display: flex;
     align-items: center;
-    input{
-        width: inherit;
-        margin-right: 8px;
-    }
+
 }
+

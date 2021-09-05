@@ -6,7 +6,15 @@
         margin-right: 3px;
     }
 }
-.search__inner-input{
+
+.inputForm{
     display: flex;
-    align-items: center;
+}
+.validation{
+    small{
+        color: red;
+    }
+}
+.search-wrapp{
+    margin-bottom: 20px;
 }

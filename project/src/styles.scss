@@ -28,10 +28,8 @@
     list-style: none;
   }
   
-  
   input {
     display: block;
-    width: 100%;
     padding: .4rem;
     font-size: 1.2rem;
     border: 1px solid #ccc;
@@ -40,7 +38,7 @@
   }
   
   .container {
-    max-width: 1400px;
+    max-width: 100%;
     margin: auto;
     overflow: hidden;
     padding: 0 2rem;

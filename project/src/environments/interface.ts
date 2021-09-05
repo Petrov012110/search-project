@@ -4,11 +4,6 @@ export interface IEniroment {
     client_secret: string
 }
 
-export interface ITwitchData {
-    box_art_url: string
-    id: string
-    name: string
-}
 
 export interface ITwitchResponse {
     data: ITwitchData[],
@@ -17,13 +12,41 @@ export interface ITwitchResponse {
     }
 }
 
+export interface ITwitchChanelResponse {
+    data: ITwitchCnanelData[],
+    pagination: {
+        cursor: string
+    }
+}
+
+export interface ITwitchData {
+    box_art_url: string
+    id: string
+    name: string
+}
+export interface ITwitchCnanelData {
+    broadcaster_language: string,
+    broadcaster_login: string,
+    display_name: string,
+    game_id: string,
+    game_name: string,
+    id: string,
+    is_live: false,
+    tags_ids: [],
+    thumbnail_url: string,
+    title: string,
+    started_at: string
+}
+
+
+
 export interface ITwitchToken {
     "access_token": string,
     "expires_in": number,
     "token_type": string
 }
 
-export interface IGitData {
+export interface IGitRepositoryData {
     archive_url: string
     archived: boolean
     assignees_url: string
@@ -119,9 +142,37 @@ export interface IGitData {
     watchers_count: number
 }
 
-export interface IGitResponse {
+export interface IGitUserData {
+    login: string,
+    id: number,
+    node_id: string,
+    avatar_url: string,
+    gravatar_id: string,
+    url: string,
+    html_url: string,
+    followers_url: string,
+    subscriptions_url: string,
+    organizations_url: string,
+    repos_url: string,
+    received_events_url: string,
+    type: string,
+    score: number,
+    following_url: string,
+    gists_url: string,
+    starred_url: string,
+    events_url: string,
+    site_admin: true
+}
+
+export interface IGitUsersResponse {
     incomplete_results: boolean,
-    items: IGitData[],
+    items: IGitUserData[],
+    total_count: number
+}
+
+export interface IGitRepositoriesResponse {
+    incomplete_results: boolean,
+    items: IGitRepositoryData[],
     total_count: number
 }
 
@@ -143,7 +194,7 @@ export interface IWikiResponse {
     },
     query: {
         search: IWikiData[]
-        searchinfo: {totalhits: number}
+        searchinfo: { totalhits: number }
     }
 }
 
@@ -151,7 +202,7 @@ export interface IWikiResponse {
 
 export type TResourseData = {
     twitch: ITwitchData[],
-    git: IGitData[],
+    git: IGitRepositoryData[],
     wiki: IWikiData[]
 }
 
@@ -171,5 +222,16 @@ export interface ICheckboxes {
     id: number,
     name: string
 }
+
+export interface INodes {
+    name: string,
+    checked: boolean,
+    children?: {
+        name: string,
+        checked: false
+    }[]
+}
+
+
 
 
