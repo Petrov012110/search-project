@@ -9,7 +9,7 @@ import { CheckboxModel } from '../models/checkbox.model';
     templateUrl: './resourses.component.html',
     styleUrls: ['./style/resourses.component.scss']
 })
-export class ResoursesComponent implements OnInit {
+export class ResoursesComponent implements OnInit, DoCheck {
 
     public form!: FormGroup;
 
@@ -48,21 +48,41 @@ export class ResoursesComponent implements OnInit {
         }
     ];
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private _managerService: ManagerService) {
         this._createForm();
     }
 
     public ngOnInit() {
-        this.form.controls["resourseControl"]?.valueChanges.subscribe(selectedValue => {
-            if (selectedValue === true) {
-                this.form.get("childrenControl")?.setValue(true);
-                console.log(this.form.status);
+
+
+        
+        this.form.get('gitControl')?.valueChanges.subscribe(selectedValue => {
+
+            if (selectedValue) {
+                this.form.get("gitRepositoryControl")?.setValue(true);
+                this.form.get("gitUserControl")?.setValue(true);
             } else {
-                this.form.get("childrenControl")?.setValue(false);
+                this.form.get("gitRepositoryControl")?.setValue(false);
+                this.form.get("gitUserControl")?.setValue(false);
             }
 
 
-        })
+        });
+        this.form.get('twitchControl')?.valueChanges.subscribe(selectedValue => {
+
+            if (selectedValue) {
+                this.form.get("twitchCategoryControl")?.setValue(true);
+                this.form.get("twitchChanelControl")?.setValue(true);
+            } else {
+                this.form.get("twitchCategoryControl")?.setValue(false);
+                this.form.get("twitchChanelControl")?.setValue(false);
+            }
+
+        });
+    }
+
+    public ngDoCheck() {
+        this._managerService.onCheckboxEvent.next(this.form)
     }
 
     public onCheckboxChange(e: Event) {
@@ -73,16 +93,18 @@ export class ResoursesComponent implements OnInit {
 
     private _createForm(): void {
         this.form = new FormGroup({
-            "resourseControl": new FormControl(),
-            "childrenControl": new FormControl()
+            "gitControl": new FormControl(),
+            "gitRepositoryControl": new FormControl(),
+            "gitUserControl": new FormControl(),
+            "twitchControl": new FormControl(),
+            "twitchCategoryControl": new FormControl(),
+            "twitchChanelControl": new FormControl(),
+            "wikiControl": new FormControl(),
         });
-    }
-
-    submit() {
-
-        console.log(this.form.status);
 
     }
+
+
 
 
 }

@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
     public inputForm: FormGroup;
     public arrData: object[] = []
     public arrOfInputValue: string[] = [];
-    public checkboxes!: CheckboxModel[];
+    public checkboxes!: FormGroup;
     public errorMessage: string;
 
     constructor(
@@ -60,7 +60,7 @@ export class SearchComponent implements OnInit {
             .pipe(
                 catchError((error: any) => {
                     console.log(error)
-                    
+
                     return throwError(error);
                     // прокинуть в error компоненту
                 }),
@@ -85,39 +85,41 @@ export class SearchComponent implements OnInit {
 
     }
 
-    public arrayQuery(filter: CheckboxModel[], input: string): (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] {
+    public arrayQuery(filter: FormGroup, input: string): (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] {
         let arr: (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] = []
-        filter.forEach(item => {
-            if (item.label === "Wikipedia" && item.checked) {
-                arr.push(this._resours.getWikiData(input))
-            } else if (item.label === "GitHub" && item.checked) {
-                if (item.checked1) {
-                    /**
-                     * репозиторий 
-                     */
-                    arr.push(this._resours.getGitRepositories(input));
-                }
-                if (item.checked2) {
-                    /**
-                     * запрос на юзера 
-                     */
-                    arr.push(this._resours.getGitUsers(input));
-                }
-            } else if (item.label === "Twitch" && item.checked) {
-                if (item.checked1) {
-                    /**
-                     * категории
-                     */
-                    arr.push(this._resours.getTwitchCategories(input));
-                }
-                if (item.checked2) {
-                    /**
-                     * каналы
-                     */
-                    arr.push(this._resours.getTwitchChannels(input));
-                }
+
+        if (filter.controls['wikiControl'].value) {
+            arr.push(this._resours.getWikiData(input))
+        }
+        if (filter.controls['gitControl'].value) {
+            if (filter.controls['gitRepositoryControl'].value) {
+                /**
+                 * репозиторий 
+                 */
+                arr.push(this._resours.getGitRepositories(input));
             }
-        });
+            if (filter.controls['gitUserControl'].value) {
+                /**
+                 * запрос на юзера 
+                 */
+                arr.push(this._resours.getGitUsers(input));
+            }
+        }
+        if (filter.controls['twitchControl'].value) {
+            if (filter.controls['twitchCategoryControl'].value) {
+                /**
+                 * категории
+                 */
+                arr.push(this._resours.getTwitchCategories(input));
+            }
+            if (filter.controls['twitchChanelControl'].value) {
+                /**
+                 * каналы
+                 */
+                arr.push(this._resours.getTwitchChannels(input));
+            }
+        }
+
         return arr;
     }
 
@@ -125,6 +127,8 @@ export class SearchComponent implements OnInit {
         this._managerService.onCheckboxEvent
             .subscribe(value => {
                 this.checkboxes = value
+                console.log("FORMA", value.controls);
+
             })
     }
 
@@ -137,11 +141,12 @@ export class SearchComponent implements OnInit {
     }
 
     public validator(): boolean {
-        if (this.checkboxes) {
-            return this.checkboxes.some(item => item.checked === true);
-        } else {
-            return false;
-        }
+        return true
+        // if (this.checkboxes) {
+        //     return this.checkboxes.some(item => item.checked === true);
+        // } else {
+        //     return false;
+        // }
     }
 
 }

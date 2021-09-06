@@ -16,7 +16,7 @@
     </div>
 </div> -->
 
-<div >
+<!-- <div >
     <form [formGroup]="form" >
         <div class="form-group">
             <label for="website">Фильтр:</label>
@@ -32,6 +32,54 @@
                             {{el.name}}
                         </label>
                     </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> -->
+
+<div >
+    <form [formGroup]="form" >
+        <div class="form-group">
+            <label for="website">Фильтр:</label>
+            <div *ngFor="let item of nodes">
+                <div *ngIf="item.name == 'GitHub'">
+                    <label>
+                        <input formControlName="gitControl" type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
+                        {{item.name}}
+                    </label>
+                    <div *ngFor="let el of item.children">
+                        <label *ngIf="el.name == 'Repositories' "  class="inner-checkbox">
+                            <input formControlName="gitRepositoryControl" type="checkbox" [value]="el.name" (change)="onCheckboxChange($event)" />
+                            {{el.name}}
+                        </label>
+                        <label *ngIf="el.name == 'Users' " class="inner-checkbox">
+                            <input formControlName="gitUserControl" type="checkbox" [value]="el.name" (change)="onCheckboxChange($event)" />
+                            {{el.name}}
+                        </label>
+                    </div>
+                </div>
+                <div *ngIf="item.name == 'Twitch'">
+                    <label >
+                        <input formControlName="twitchControl" type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
+                        {{item.name}}
+                    </label>
+                    <div *ngFor="let el of item.children">
+                        <label *ngIf="el.name == 'Category' " class="inner-checkbox">
+                            <input formControlName="twitchCategoryControl" type="checkbox" [value]="el.name" (change)="onCheckboxChange($event)" />
+                            {{el.name}}
+                        </label>
+                        <label *ngIf="el.name == 'Chanels' " class="inner-checkbox">
+                            <input formControlName="twitchChanelControl" type="checkbox" [value]="el.name" (change)="onCheckboxChange($event)" />
+                            {{el.name}}
+                        </label>
+                    </div>
+                </div>
+                <div *ngIf="item.name === 'Wikipedia'">
+                    <label>
+                        <input formControlName="wikiControl" type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
+                        {{item.name}}
+                    </label>
                 </div>
             </div>
         </div>
