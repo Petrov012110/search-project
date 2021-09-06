@@ -4,9 +4,14 @@
     padding-bottom: 20px;
 
 }
+label{
+    display: flex;
+    align-items: center;
+}
 
-.checkboxes-inner{
+.inner-checkbox{
     padding-left: 20px;
+
 }
 
 .wrapp{

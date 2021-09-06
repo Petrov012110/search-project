@@ -1,4 +1,4 @@
-
+<!-- 
 <div *ngFor="let item of checkboxList" class="chekboxes">
     <div class="wrapp">
         <input  type="checkbox" [(ngModel)]="item.checked" (ngModelChange)="onToggle(item, $event)">
@@ -14,4 +14,26 @@
             <label for="item">{{item.sublabel2}}</label>
         </div>
     </div>
+</div> -->
+
+<div >
+    <form [formGroup]="form" >
+        <div class="form-group">
+            <label for="website">Фильтр:</label>
+            <div *ngFor="let item of nodes">
+                <label>
+                    <input formControlName="resourseControl" type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
+                    {{item.name}}
+                </label>
+                <div *ngIf="item.children">
+                    <div *ngFor="let el of item.children">
+                        <label class="inner-checkbox">
+                            <input formControlName="childrenControl" type="checkbox" [value]="el.name" (change)="onCheckboxChange($event)" />
+                            {{el.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>

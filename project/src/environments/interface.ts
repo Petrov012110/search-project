@@ -226,12 +226,5 @@ export interface ICheckboxes {
 export interface INodes {
     name: string,
     checked: boolean,
-    children?: {
-        name: string,
-        checked: false
-    }[]
+    children?: INodes[]
 }
-
-
-
-

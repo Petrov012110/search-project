@@ -11,11 +11,15 @@ export class FilterComponent implements OnInit {
 
   /** filter вью модель всего фильтра(чекбоксы и др.) */
   public filter: FilterViewModel = new FilterViewModel();
-  public checkedvalues: string[] = []
+  public lengthContent!: number;
 
   constructor(private _managerService: ManagerService) { }
 
   ngOnInit(): void {
+    this._managerService.onCounterEvent
+      .subscribe(value => {
+        this.lengthContent = value
+      })
   }
 
 

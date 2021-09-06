@@ -11,4 +11,6 @@ export class ManagerService {
     public onServerAnswerEvent: Subject<ITable[]> = new Subject<ITable[]>();
     public onCheckboxEvent: Subject<CheckboxModel[]> = new Subject<CheckboxModel[]>();
     public onHistoryEvent: Subject<string> = new Subject<string>();
+    public onCounterEvent: Subject<number> = new Subject<number>();
+    
 }

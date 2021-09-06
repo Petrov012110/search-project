@@ -1,0 +1,19 @@
+.bodyTable-show{
+    max-width: 250px;
+    width: 100%;
+    position: absolute;
+    transition: all .5s;
+
+}
+
+.bodyTable-hidden{
+    max-width: 250px;
+    width: 100%;
+    position: absolute;
+    transition: all .5s;
+    left: -100%;
+}
+
+.headerHistory{
+    cursor: pointer;
+}

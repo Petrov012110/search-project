@@ -1,3 +1,9 @@
 table{
     width: inherit;
 }
+td{
+    padding-right: 5px;
+    &:last-child{
+        padding-right: 0;
+    }
+}

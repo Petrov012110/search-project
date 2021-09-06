@@ -12,6 +12,7 @@ import { SearchComponent } from '../search/search.component';
 export class HistoryComponent implements OnInit {
 
   arrOfInputValue: string[] = [];
+  public historyStyle: string = 'bodyTable-hidden';
 
   constructor(
     private _storage: LocalStorageService,
@@ -42,6 +43,15 @@ export class HistoryComponent implements OnInit {
 
   public getValue($event: any): void {
     this._managerService.onHistoryEvent.next($event.target.innerText)
+  }
+
+  public showHistory(): void {
+    console.log(1);
+    if(this.historyStyle === 'bodyTable-show') {
+      this.historyStyle = 'bodyTable-hidden'
+    } else {
+      this.historyStyle = 'bodyTable-show'
+    }
   }
 
 }
