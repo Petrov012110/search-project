@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from './services/localStorage.service';
 import { ManagerService } from './services/manager.service';
 import { TreeModule } from '@circlon/angular-tree-component';
+import { ErrorComponent } from './components/error/error.component';
+import { HandleError } from './services/handleError.service';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { TreeModule } from '@circlon/angular-tree-component';
     ResoursesComponent,
     InformationComponent,
     SortingComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { TreeModule } from '@circlon/angular-tree-component';
   providers: [
     ResourceService,
     LocalStorageService,
-    ManagerService
+    ManagerService,
+    HandleError 
   ],
   bootstrap: [AppComponent]
 })

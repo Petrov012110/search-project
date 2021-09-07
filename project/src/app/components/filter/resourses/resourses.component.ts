@@ -1,5 +1,6 @@
 import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 import { ManagerService } from 'src/app/services/manager.service';
 import { INodes } from 'src/environments/interface';
 import { CheckboxModel } from '../models/checkbox.model';
@@ -9,7 +10,7 @@ import { CheckboxModel } from '../models/checkbox.model';
     templateUrl: './resourses.component.html',
     styleUrls: ['./style/resourses.component.scss']
 })
-export class ResoursesComponent implements OnInit, DoCheck {
+export class ResoursesComponent implements OnInit {
 
     public form!: FormGroup;
 
@@ -54,8 +55,12 @@ export class ResoursesComponent implements OnInit, DoCheck {
 
     public ngOnInit() {
 
+        this.form.valueChanges
+            .pipe(
+                debounceTime(50)
+            )
+            .subscribe(el => this._managerService.onCheckboxEvent.next(this.form))
 
-        
         this.form.get('gitControl')?.valueChanges.subscribe(selectedValue => {
 
             if (selectedValue) {
@@ -81,9 +86,9 @@ export class ResoursesComponent implements OnInit, DoCheck {
         });
     }
 
-    public ngDoCheck() {
-        this._managerService.onCheckboxEvent.next(this.form)
-    }
+    // public ngDoCheck() {
+    // this._managerService.onCheckboxEvent.next(this.form)
+    // }
 
     public onCheckboxChange(e: Event) {
 

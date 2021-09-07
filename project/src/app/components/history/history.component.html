@@ -8,7 +8,11 @@
     </thead>
     <tbody [ngClass]="[historyStyle]">
         <tr *ngFor="let i of arrOfInputValue; let idx = index">
-            <td (click)="getValue($event)">{{ i }}</td>
+            <div>
+                <td>{{idx+1}}. </td>
+                <td (click)="getValue(i)">{{ i.input }}</td>
+                <td class="date" (click)="getValue(i)">{{ i.date | date: 'short'}}</td>
+            </div>
         </tr>
     </tbody>
 </table>

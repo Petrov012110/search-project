@@ -228,3 +228,15 @@ export interface INodes {
     checked: boolean,
     children?: INodes[]
 }
+
+export interface IFormControls {
+    gitControl: string,
+    gitRepositoryControl: string,
+    gitUserControl: string,
+    twitchControl: string,
+    twitchCategoryControl: string,
+    twitchChanelControl: string,
+    wikiControl: string
+}
+
+

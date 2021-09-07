@@ -27,7 +27,7 @@ export class ResourceService {
 
     public getTwitchCategories(data: string): Observable<TwitchCategoryModel[]> {
 
-        return this.http.get<ITwitchResponse>(`https://api.twitch.tv/helix/search/categories?query=${data}`, {
+        return this.http.get<ITwitchResponse>(`https://api.twitch.tv/helix/searc/categories?query=${data}`, {
             headers: {
                 "Client-Id": `${environment.clientId}`,
                 "Authorization": `Bearer ${this._token}`
@@ -41,7 +41,7 @@ export class ResourceService {
 
     public getTwitchChannels(data: string): Observable<TwitchChanelModel[]> {
 
-        return this.http.get<ITwitchChanelResponse>(`https://api.twitch.tv/helix/search/channels?query=${data}`, {
+        return this.http.get<ITwitchChanelResponse>(`https://api.twitch.tv/helix/searc/channels?query=${data}`, {
             headers: {
                 "Client-Id": `${environment.clientId}`,
                 "Authorization": `Bearer ${this._token}`
@@ -53,23 +53,12 @@ export class ResourceService {
         )
     }
 
-    private setToken(response: ITwitchToken) {
-        let expiresDate = new Date(new Date().getTime() + +response.expires_in * 1000);
-        localStorage.setItem("twitch-token", response.access_token)
-        localStorage.setItem("twitch-token-expires", expiresDate.toString())
-
-    }
-
     public getGitRepositories(data: string): Observable<GitRepositoryModel[]> {
 
         return this.http.get<IGitRepositoriesResponse>(`https://api.github.com/search/repositories?q=${data}`)
             .pipe(
                 map((response: GitRepositoryResponseModel): GitRepositoryModel[] => {
                     return response.items.map(item => new GitRepositoryModel(item))
-                }),
-                catchError(error => {
-                    console.log('error: ', error);
-                    return of(error);
                 })
             )
 
@@ -81,10 +70,6 @@ export class ResourceService {
             .pipe(
                 map((response: GitUserResponseModel): GitUserModel[] => {
                     return response.items.map(item => new GitUserModel(item))
-                }),
-                catchError(error => {
-                    console.log('error: ', error);
-                    return of(error);
                 })
             )
 
@@ -96,10 +81,6 @@ export class ResourceService {
             .pipe(
                 map((response: WikiResponseModel): WikiModel[] => {
                     return response.query.search.map(item => new WikiModel(item))
-                }),
-                catchError(error => {
-                    console.log('error: ', error);
-                    return of(error);
                 })
             )
     }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HistoryItemViewModel } from 'src/app/models/historyItem.model';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { ManagerService } from 'src/app/services/manager.service';
-import { ResourceService } from 'src/app/services/resourses.service';
-import { SearchComponent } from '../search/search.component';
+
 
 @Component({
   selector: 'app-history',
@@ -11,7 +11,7 @@ import { SearchComponent } from '../search/search.component';
 })
 export class HistoryComponent implements OnInit {
 
-  arrOfInputValue: string[] = [];
+  arrOfInputValue: HistoryItemViewModel[] = [];
   public historyStyle: string = 'bodyTable-hidden';
 
   constructor(
@@ -37,16 +37,16 @@ export class HistoryComponent implements OnInit {
         if(this.arrOfInputValue.length+1 > 15) {
           this.arrOfInputValue.splice(0, 1);
         }
-        this.arrOfInputValue.push(this._storage.cutInputValue((res)));
+
+        this.arrOfInputValue.push(new HistoryItemViewModel(res));
       });
   }
 
-  public getValue($event: any): void {
-    this._managerService.onHistoryEvent.next($event.target.innerText)
+  public getValue(objectHistoryItem: HistoryItemViewModel): void {
+    this._managerService.onHistoryEvent.next(objectHistoryItem)
   }
 
   public showHistory(): void {
-    console.log(1);
     if(this.historyStyle === 'bodyTable-show') {
       this.historyStyle = 'bodyTable-hidden'
     } else {
