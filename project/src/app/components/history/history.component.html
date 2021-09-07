@@ -1,11 +1,5 @@
 <table class="historyTable">
-    <thead>
-        <tr>
-            <th class="headerHistory" (click)="showHistory()">История
-                <span class="material-icons">history</span> 
-            </th>
-        </tr>
-    </thead>
+
     <tbody [ngClass]="[historyStyle]">
         <tr *ngFor="let i of arrOfInputValue; let idx = index">
             <div>

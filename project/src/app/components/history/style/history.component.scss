@@ -1,3 +1,6 @@
+tbody{
+    padding-left: 15px;
+}
 .bodyTable-show{
     max-width: 250px;
     width: 100%;
@@ -20,4 +23,9 @@
 
 .date{
     padding-left: 7px;
+}
+
+table th, table td {
+    padding: 0.5rem;
+    text-align: left;
 }

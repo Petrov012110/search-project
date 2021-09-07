@@ -71,8 +71,8 @@ export class ResoursesComponent implements OnInit {
                 this.form.get("gitUserControl")?.setValue(false);
             }
 
-
         });
+
         this.form.get('twitchControl')?.valueChanges.subscribe(selectedValue => {
 
             if (selectedValue) {
@@ -84,16 +84,6 @@ export class ResoursesComponent implements OnInit {
             }
 
         });
-    }
-
-    // public ngDoCheck() {
-    // this._managerService.onCheckboxEvent.next(this.form)
-    // }
-
-    public onCheckboxChange(e: Event) {
-
-        const website: FormArray = this.form.get('website') as FormArray;
-
     }
 
     private _createForm(): void {

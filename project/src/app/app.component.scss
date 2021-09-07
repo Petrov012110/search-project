@@ -1,12 +1,15 @@
 .container{
     &__inner{
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         padding-top: 20px;
     }
 }
 .filter{
-    width: 400px;
+    position: absolute;
+    right: 0;
+    max-width: 300px;
+    width: 100%;
 }
 .resourses-content{
     max-width: 900px;
@@ -16,5 +19,8 @@ app-content{
     width: 100%;
 }
 .history{
-
+    position: absolute;
+    left: 0;
+    max-width: 300px;
+    width: 100%;
 }

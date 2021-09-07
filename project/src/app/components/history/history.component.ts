@@ -12,7 +12,7 @@ import { ManagerService } from 'src/app/services/manager.service';
 export class HistoryComponent implements OnInit {
 
   arrOfInputValue: HistoryItemViewModel[] = [];
-  public historyStyle: string = 'bodyTable-hidden';
+  public historyStyle: string = 'bodyTable-show';
 
   constructor(
     private _storage: LocalStorageService,

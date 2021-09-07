@@ -31,7 +31,7 @@ export class LocalStorageService {
         let c: Array<HistoryItemViewModel> = JSON.parse(localStorage.getItem('searchHistory') || '[]');
         
         c.forEach(item => {
-            if (item.input === objectHistoryItem.input  && item.controls) {
+            if (item.input === objectHistoryItem.input  && item.controls && item.date == objectHistoryItem.date) {
                
                 this.controls = item.controls
                 
