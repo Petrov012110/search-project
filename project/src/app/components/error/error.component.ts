@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { delay, tap } from 'rxjs/operators';
 import { GlobalErrorHandlerService } from 'src/app/services/globalErrorHandle.service';
+
 @Component({
     selector: 'app-error',
     templateUrl: './error.component.html',
@@ -9,7 +10,7 @@ import { GlobalErrorHandlerService } from 'src/app/services/globalErrorHandle.se
 })
 export class ErrorComponent implements OnInit {
 
-    public errorMessage: string | null = null;
+    public errorMessage!: string | null ;
 
     constructor(private _handleErrorService: GlobalErrorHandlerService) {
 
@@ -19,7 +20,7 @@ export class ErrorComponent implements OnInit {
         this._handleErrorService.onErrorEvent
             .pipe(
                 tap(error => {
-                    if (error) {
+                    if (error) {                      
                         this.errorMessage = error;
                     } else {
                         this.errorMessage = null;

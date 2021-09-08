@@ -66,10 +66,10 @@ export class SearchComponent implements OnInit, OnDestroy {
         forkJoin(this.arrayQuery( this.controls, this.inputForm.controls['inputControl'].value))
             .pipe(
                 
-                catchError((error: HttpErrorResponse) => {
-                    // this._handleErrorService.setError(error);
-                    return throwError(error);
-                }),
+                // catchError((error: HttpErrorResponse) => {
+                //     // this._handleErrorService.setError(error);
+                //     return throwError(error);
+                // }),
                 takeUntil(this._unsubscriber)
 
             ).subscribe((response: (TwitchCategoryModel[] | GitRepositoryModel[] | WikiModel[] | TwitchChanelModel[] | GitUserModel[])[]) => {
@@ -147,7 +147,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     public getValueHistory(): void {
         this._managerService.onHistoryEvent
             .subscribe(value => {
-                this.inputForm.controls['inputContro'].setValue(value.input);
+                this.inputForm.controls['inputControl'].setValue(value.input);
                 this.controls = this._storage.getHistoryControls(value);
                 this.getData();
                 this._managerService.onHistoryControlsEvent.next(this._storage.getHistoryControls(value));

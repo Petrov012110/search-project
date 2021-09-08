@@ -43,7 +43,7 @@ import { GlobalErrorHandlerService } from './services/globalErrorHandle.service'
     LocalStorageService,
     ManagerService,
     GlobalErrorHandlerService,
-    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }  
+    { provide: ErrorHandler, useExisting: GlobalErrorHandlerService }  
   ],
   bootstrap: [AppComponent]
 })
