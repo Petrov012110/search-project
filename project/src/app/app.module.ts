@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { TreeModule } from '@circlon/angular-tree-component';
 import { AppComponent } from './app.component';
 import { HistoryComponent } from './components/history/history.component';
 import { FilterComponent } from './components/filter/filter.component';
@@ -10,12 +12,10 @@ import { ResoursesComponent } from './components/filter/resourses/resourses.comp
 import { InformationComponent } from './components/filter/information/information.component';
 import { SortingComponent } from './components/filter/sorting/sorting.component';
 import { ResourceService } from './services/resourses.service';
-import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from './services/localStorage.service';
 import { ManagerService } from './services/manager.service';
-import { TreeModule } from '@circlon/angular-tree-component';
 import { ErrorComponent } from './components/error/error.component';
-import { HandleError } from './services/handleError.service';
+import { GlobalErrorHandlerService } from './services/globalErrorHandle.service';
 
 
 @NgModule({
@@ -42,7 +42,8 @@ import { HandleError } from './services/handleError.service';
     ResourceService,
     LocalStorageService,
     ManagerService,
-    HandleError 
+    GlobalErrorHandlerService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }  
   ],
   bootstrap: [AppComponent]
 })

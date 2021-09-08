@@ -41,7 +41,7 @@ export class ResourceService {
 
     public getTwitchChannels(data: string): Observable<TwitchChanelModel[]> {
 
-        return this.http.get<ITwitchChanelResponse>(`https://api.twitch.tv/helix/searc/channels?query=${data}`, {
+        return this.http.get<ITwitchChanelResponse>(`https://api.twitch.tv/helix/search/channels?query=${data}`, {
             headers: {
                 "Client-Id": `${environment.clientId}`,
                 "Authorization": `Bearer ${this._token}`
@@ -77,7 +77,7 @@ export class ResourceService {
 
     public getWikiData(data: string): Observable<WikiModel[]> {
 
-        return this.http.get<IWikiResponse>(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&origin=*&srsearch=${data}`)
+        return this.http.get<IWikiResponse>(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&origin=*&srsearch=${data}&srlimit=30`)
             .pipe(
                 map((response: WikiResponseModel): WikiModel[] => {
                     return response.query.search.map(item => new WikiModel(item))

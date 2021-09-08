@@ -55,19 +55,25 @@ export class ResoursesComponent implements OnInit {
 
     public ngOnInit() {
 
+        this.setHistoryControlsValue();
+
         this.form.valueChanges
             .pipe(
                 debounceTime(50)
             )
-            .subscribe(el => this._managerService.onCheckboxEvent.next(this.form))
+            .subscribe(el => this._managerService.onCheckboxEvent.next(this.form));
 
         this.form.get('gitControl')?.valueChanges.subscribe(selectedValue => {
 
             if (selectedValue) {
+                this.form.get("gitRepositoryControl")?.enable();
                 this.form.get("gitRepositoryControl")?.setValue(true);
+                this.form.get("gitUserControl")?.enable();
                 this.form.get("gitUserControl")?.setValue(true);
             } else {
+                this.form.get("gitRepositoryControl")?.disable();
                 this.form.get("gitRepositoryControl")?.setValue(false);
+                this.form.get("gitUserControl")?.disable();
                 this.form.get("gitUserControl")?.setValue(false);
             }
 
@@ -76,10 +82,14 @@ export class ResoursesComponent implements OnInit {
         this.form.get('twitchControl')?.valueChanges.subscribe(selectedValue => {
 
             if (selectedValue) {
+                this.form.get("twitchCategoryControl")?.enable();
                 this.form.get("twitchCategoryControl")?.setValue(true);
+                this.form.get("twitchChanelControl")?.enable();
                 this.form.get("twitchChanelControl")?.setValue(true);
             } else {
+                this.form.get("twitchCategoryControl")?.disable();
                 this.form.get("twitchCategoryControl")?.setValue(false);
+                this.form.get("twitchChanelControl")?.disable();
                 this.form.get("twitchChanelControl")?.setValue(false);
             }
 
@@ -97,6 +107,19 @@ export class ResoursesComponent implements OnInit {
             "wikiControl": new FormControl(),
         });
 
+    }
+
+    public setHistoryControlsValue(): void {
+        this._managerService.onHistoryControlsEvent
+            .subscribe(item => {
+                this.form.get('gitControl')?.setValue(item.gitControl);
+                this.form.get('gitRepositoryControl')?.setValue(item.repositoriesControl);
+                this.form.get('gitUserControl')?.setValue(item.usersControl);
+                this.form.get('twitchControl')?.setValue(item.twitchControl);
+                this.form.get('twitchCategoryControl')?.setValue(item.categoriesControl);
+                this.form.get('twitchChanelControl')?.setValue(item.chanelsControl);
+                this.form.get('wikiControl')?.setValue(item.wikiControl);
+            })
     }
 
 

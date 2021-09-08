@@ -1,9 +1,7 @@
 
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
-import { HandleError } from 'src/app/services/handleError.service';
-
+import { delay, tap } from 'rxjs/operators';
+import { GlobalErrorHandlerService } from 'src/app/services/globalErrorHandle.service';
 @Component({
     selector: 'app-error',
     templateUrl: './error.component.html',
@@ -12,24 +10,26 @@ import { HandleError } from 'src/app/services/handleError.service';
 export class ErrorComponent implements OnInit {
 
     public errorMessage: string | null = null;
-   
 
- 
-
-    constructor(private _handleErrorService: HandleError) {
+    constructor(private _handleErrorService: GlobalErrorHandlerService) {
 
     }
 
     public ngOnInit(): void {
         this._handleErrorService.onErrorEvent
+            .pipe(
+                tap(error => {
+                    if (error) {
+                        this.errorMessage = error;
+                    } else {
+                        this.errorMessage = null;
+                    }
+                }),
+                delay(5000)
+            )
             .subscribe(error => {
-                if(error) {
-                    this.errorMessage = error.message;
-                } else {
-                    this.errorMessage = null;
-                    
-                }
-            })
+                this.errorMessage = null;
+            });
     }
 
     public closeError(): void {

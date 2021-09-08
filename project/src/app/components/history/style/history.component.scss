@@ -2,20 +2,16 @@ tbody{
     padding-left: 15px;
 }
 .bodyTable-show{
-    max-width: 250px;
+    max-width: 350px;
     width: 100%;
     position: absolute;
     transition: all .5s;
 
 }
-
-.bodyTable-hidden{
-    max-width: 250px;
-    width: 100%;
-    position: absolute;
-    transition: all .5s;
-    left: -100%;
+.historyTable{
+    width: 350px;
 }
+
 
 .headerHistory{
     cursor: pointer;

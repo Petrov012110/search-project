@@ -3,6 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { Subject } from "rxjs";
 import { ITable } from "../../environments/interface";
 import { CheckboxModel } from "../components/filter/models/checkbox.model";
+import { ControlsViewModel } from "../models/controls.view-model";
 import { HistoryItemViewModel } from "../models/historyItem.model";
 
 
@@ -14,5 +15,6 @@ export class ManagerService {
     public onCheckboxEvent: Subject<FormGroup> = new Subject<FormGroup>();
     public onHistoryEvent: Subject<HistoryItemViewModel> = new Subject<HistoryItemViewModel>();
     public onCounterEvent: Subject<number> = new Subject<number>();
+    public onHistoryControlsEvent: Subject<ControlsViewModel> = new Subject<ControlsViewModel>();
     
 }

@@ -7,6 +7,18 @@ import { ResourceService } from './services/resourses.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor ( private _resours: ResourceService ) { }
+
+  public bntStyle = 'show-history';
+
+  constructor ( ) { }
+
+  public showHistory(): void {
+    if(this.bntStyle == 'show-history') {
+      this.bntStyle = 'hide-history'
+    } else {
+      this.bntStyle = 'show-history'
+    }
+
+  }
   
 }

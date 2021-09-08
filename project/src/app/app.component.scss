@@ -23,4 +23,33 @@ app-content{
     left: 0;
     max-width: 300px;
     width: 100%;
+    padding-left: 20px;
 }
+.show-history{
+ 
+        
+        position: absolute;
+        transition: all .5s;
+        left: 0;
+        top: 40px;
+        
+    
+}
+.hide-history{
+    position: absolute;
+    transition: all .5s;
+    left: -100%;
+    top: 40px;
+
+
+
+}
+
+button{
+    display: flex;
+    align-items: center;
+    padding: 4px 3px;
+    cursor: pointer;
+}
+
+// https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=Nelson%20Mandela&srlimit=20

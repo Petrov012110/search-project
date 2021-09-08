@@ -10,7 +10,6 @@ import { GitUserModel } from 'src/app/models/gitUser-model/gitUser.model';
 import { TwitchCategoryModel } from 'src/app/models/twitchCategory-model/twitchCategory.model';
 import { TwitchChanelModel } from 'src/app/models/twitchChanels-model/twitchChanel.model';
 import { WikiModel } from 'src/app/models/wiki-model/wiki.model';
-import { HandleError } from 'src/app/services/handleError.service';
 import { ITable } from 'src/environments/interface';
 import { LocalStorageService } from '../../services/localStorage.service';
 import { ManagerService } from '../../services/manager.service';
@@ -38,7 +37,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         private _resours: ResourceService,
         private _storage: LocalStorageService,
         private _managerService: ManagerService,
-        private _handleErrorService: HandleError
     ) {
         this.errorMessage = "Задайте фильтр"
         this.inputForm = new FormGroup({
@@ -69,7 +67,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             .pipe(
                 
                 catchError((error: HttpErrorResponse) => {
-                    this._handleErrorService.setError(error);
+                    // this._handleErrorService.setError(error);
                     return throwError(error);
                 }),
                 takeUntil(this._unsubscriber)
@@ -82,6 +80,9 @@ export class SearchComponent implements OnInit, OnDestroy {
                 response.forEach(item => {
                     item.forEach((el: TwitchCategoryModel | GitRepositoryModel | WikiModel | TwitchChanelModel | GitUserModel) => {
                         tableItems.push(new CommonViewModel(el));
+                        
+                        
+                   
                         counter++;
                     })
                 });
@@ -133,7 +134,6 @@ export class SearchComponent implements OnInit, OnDestroy {
             }
             
         }
-
         return arr;
     }
 
@@ -141,27 +141,17 @@ export class SearchComponent implements OnInit, OnDestroy {
         this._managerService.onCheckboxEvent
             .subscribe(value => {
                 this.controls = new ControlsViewModel(value);
-            })
+            });
     }
 
     public getValueHistory(): void {
         this._managerService.onHistoryEvent
             .subscribe(value => {
-                this.inputForm.controls['inputControl'].setValue(value.input);
-                this.controls = this._storage.getHistoryControls(value)
+                this.inputForm.controls['inputContro'].setValue(value.input);
+                this.controls = this._storage.getHistoryControls(value);
                 this.getData();
-            })
+                this._managerService.onHistoryControlsEvent.next(this._storage.getHistoryControls(value));
+            });
     }
-
-    public validator(): boolean {
-        return true
-        // if (this.checkboxes) {
-        //     return this.checkboxes.some(item => item.checked === true);
-        // } else {
-        //     return false;
-        // }
-    }
-
-
 
 }

@@ -4,7 +4,7 @@
         <tr *ngFor="let i of arrOfInputValue; let idx = index">
             <div>
                 <td>{{idx+1}}. </td>
-                <td (click)="getValue(i)">{{ i.input }}</td>
+                <td (click)="getValue(i)">{{ i.input | titlecase}}</td>
                 <td class="date" (click)="getValue(i)">{{ i.date | date: 'short'}}</td>
             </div>
         </tr>
