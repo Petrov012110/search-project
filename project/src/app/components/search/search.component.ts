@@ -63,13 +63,13 @@ export class SearchComponent implements OnInit, OnDestroy {
             return;
         }
 
-        forkJoin(this.arrayQuery( this.controls, this.inputForm.controls['inputControl'].value))
+        forkJoin(this.arrayQuery(this.controls, this.inputForm.controls['inputControl'].value))
             .pipe(
-                
-                // catchError((error: HttpErrorResponse) => {
-                //     // this._handleErrorService.setError(error);
-                //     return throwError(error);
-                // }),
+
+                catchError((error: HttpErrorResponse) => {
+                    // this._handleErrorService.setError(error);
+                    return throwError(error);
+                }),
                 takeUntil(this._unsubscriber)
 
             ).subscribe((response: (TwitchCategoryModel[] | GitRepositoryModel[] | WikiModel[] | TwitchChanelModel[] | GitUserModel[])[]) => {
@@ -80,9 +80,9 @@ export class SearchComponent implements OnInit, OnDestroy {
                 response.forEach(item => {
                     item.forEach((el: TwitchCategoryModel | GitRepositoryModel | WikiModel | TwitchChanelModel | GitUserModel) => {
                         tableItems.push(new CommonViewModel(el));
-                        
-                        
-                   
+
+
+
                         counter++;
                     })
                 });
@@ -100,7 +100,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
         let arr: (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] = [];
 
-        if(filter) {
+        if (filter) {
             if (filter.wikiControl) {
                 arr.push(this._resours.getWikiData(input));
             }
@@ -132,7 +132,7 @@ export class SearchComponent implements OnInit, OnDestroy {
                     arr.push(this._resours.getTwitchChannels(input));
                 }
             }
-            
+
         }
         return arr;
     }
@@ -149,8 +149,8 @@ export class SearchComponent implements OnInit, OnDestroy {
             .subscribe(value => {
                 this.inputForm.controls['inputControl'].setValue(value.input);
                 this.controls = this._storage.getHistoryControls(value);
-                this.getData();
                 this._managerService.onHistoryControlsEvent.next(this._storage.getHistoryControls(value));
+                this.getData();
             });
     }
 

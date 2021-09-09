@@ -10,7 +10,7 @@ import { GlobalErrorHandlerService } from 'src/app/services/globalErrorHandle.se
 })
 export class ErrorComponent implements OnInit {
 
-    public errorMessage!: string | null ;
+    public errorMessage: string | null = '';
 
     constructor(private _handleErrorService: GlobalErrorHandlerService) {
 
@@ -19,17 +19,17 @@ export class ErrorComponent implements OnInit {
     public ngOnInit(): void {
         this._handleErrorService.onErrorEvent
             .pipe(
-                tap(error => {
-                    if (error) {                      
-                        this.errorMessage = error;
-                    } else {
-                        this.errorMessage = null;
-                    }
-                }),
-                delay(5000)
+                // tap(error => {
+                //     if (error) {
+                //         this.errorMessage = error;
+                //     } else {
+                //         this.errorMessage = null;
+                //     }
+                // }),
+                // delay(5000)
             )
             .subscribe(error => {
-                this.errorMessage = null;
+                this.errorMessage = error;
             });
     }
 
