@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ManagerService } from 'src/app/services/manager.service';
-import { FilterViewModel } from './models/filter.view-model';
-
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -9,8 +7,6 @@ import { FilterViewModel } from './models/filter.view-model';
 })
 export class FilterComponent implements OnInit {
 
-  /** filter вью модель всего фильтра(чекбоксы и др.) */
-  public filter: FilterViewModel = new FilterViewModel();
   public lengthContent!: number;
 
   constructor(private _managerService: ManagerService) { }

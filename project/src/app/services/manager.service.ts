@@ -2,9 +2,8 @@ import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Subject } from "rxjs";
 import { ITable } from "../../environments/interface";
-import { CheckboxModel } from "../components/filter/models/checkbox.model";
 import { ControlsViewModel } from "../models/controls.view-model";
-import { HistoryItemViewModel } from "../models/historyItem.model";
+import { HistoryItemViewModel } from "../models/history-item.model";
 
 
 @Injectable()

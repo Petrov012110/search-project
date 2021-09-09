@@ -1,8 +1,8 @@
-import { GitRepositoryModel } from "./gitRepository-model/git.model";
-import { GitUserModel } from "./gitUser-model/gitUser.model";
-import { TwitchCategoryModel } from "./twitchCategory-model/twitchCategory.model";
-import { TwitchChanelModel } from "./twitchChanels-model/twitchChanel.model";
-import { WikiModel } from "./wiki-model/wiki.model";
+import { GitRepositoryModel } from "./git-repository/git.model";
+import { GitUserModel } from "./git-user/gitUser.model";
+import { TwitchCategoryModel } from "./twitch-category/twitchCategory.model";
+import { TwitchChanelModel } from "./twitch-chanels/twitchChanel.model";
+import { WikiModel } from "./wiki/wiki.model";
 
 export class CommonViewModel {
     public name: string = " -";

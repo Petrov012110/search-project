@@ -1,7 +1,9 @@
-<div>
+<div *ngIf="errorMessage">
     <div class="error-alert" (click)="closeError()">
         <span>{{errorMessage}}</span>
-        <button> <span class="material-icons">close</span>
+        <button>
+            
+            <span class="material-icons">close</span> 
         </button>
     </div>
 </div>

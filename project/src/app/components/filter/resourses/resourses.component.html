@@ -38,46 +38,46 @@
     </form>
 </div> -->
 
-<div>
+<div class="form-checkboxes">
     <form [formGroup]="form">
         <div class="form-group">
             <label for="website">Фильтр:</label>
             <div *ngFor="let item of nodes">
                 <div *ngIf="item.name == 'GitHub'">
                     <label>
-                        <input formControlName="gitControl" type="checkbox" [value]="item.name" />
+                        <input formControlName="gitControl" type="checkbox" />
                         {{item.name}}
                     </label>
                     <div *ngFor="let el of item.children">
                         <label *ngIf="el.name == 'Repositories' " class="inner-checkbox">
-                            <input [attr.disabled]="true" formControlName="gitRepositoryControl" type="checkbox" [value]="el.name" />
+                            <input [attr.disabled]="true" formControlName="gitRepositoryControl" type="checkbox"  />
                             {{el.name}}
                         </label>
                         <label *ngIf="el.name == 'Users' " class="inner-checkbox">
-                            <input [attr.disabled]="true" formControlName="gitUserControl" type="checkbox" [value]="el.name" />
+                            <input [attr.disabled]="true" formControlName="gitUserControl" type="checkbox"  />
                             {{el.name}}
                         </label>
                     </div>
                 </div>
                 <div *ngIf="item.name == 'Twitch'">
                     <label>
-                        <input formControlName="twitchControl" type="checkbox" [value]="item.name" />
+                        <input formControlName="twitchControl" type="checkbox"  />
                         {{item.name}}
                     </label>
                     <div *ngFor="let el of item.children">
                         <label *ngIf="el.name == 'Category' " class="inner-checkbox">
-                            <input [attr.disabled]="true" formControlName="twitchCategoryControl" type="checkbox" [value]="el.name" />
+                            <input [attr.disabled]="true" formControlName="twitchCategoryControl" type="checkbox"  />
                             {{el.name}} Ошибка!
                         </label>
                         <label *ngIf="el.name == 'Chanels' " class="inner-checkbox">
-                            <input [attr.disabled]="true" formControlName="twitchChanelControl" type="checkbox" [value]="el.name" />
+                            <input [attr.disabled]="true" formControlName="twitchChanelControl" type="checkbox"  />
                             {{el.name}}
                         </label>
                     </div>
                 </div>
-                <div *ngIf="item.name === 'Wikipedia'">
+                <div *ngIf="item.name == 'Wikipedia'">
                     <label>
-                        <input formControlName="wikiControl" type="checkbox" [value]="item.name" />
+                        <input formControlName="wikiControl" type="checkbox"  />
                         {{item.name}}
                     </label>
                 </div>

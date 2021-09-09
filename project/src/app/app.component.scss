@@ -38,7 +38,7 @@ app-content{
 .hide-history{
     position: absolute;
     transition: all .5s;
-    left: -100%;
+    left: -120%;
     top: 40px;
 
 
@@ -52,4 +52,3 @@ button{
     cursor: pointer;
 }
 
-// https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=Nelson%20Mandela&srlimit=20

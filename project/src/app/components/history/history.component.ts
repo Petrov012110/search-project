@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HistoryItemViewModel } from 'src/app/models/historyItem.model';
-import { LocalStorageService } from 'src/app/services/localStorage.service';
+import { HistoryItemViewModel } from 'src/app/models/history-item.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ManagerService } from 'src/app/services/manager.service';
 
 
@@ -12,7 +12,6 @@ import { ManagerService } from 'src/app/services/manager.service';
 export class HistoryComponent implements OnInit {
 
   arrOfInputValue: HistoryItemViewModel[] = [];
-  public historyStyle: string = 'bodyTable-show';
 
   constructor(
     private _storage: LocalStorageService,
@@ -32,26 +31,21 @@ export class HistoryComponent implements OnInit {
   }
 
   private subscribeOnSearchEvent(): void {
+
     this._managerService.onSearchEvent
       .subscribe(res => {
+
         if(this.arrOfInputValue.length+1 > 15) {
           this.arrOfInputValue.splice(0, 1);
         }
 
         this.arrOfInputValue.push(new HistoryItemViewModel(res));
+
       });
   }
 
   public getValue(objectHistoryItem: HistoryItemViewModel): void {
-    this._managerService.onHistoryEvent.next(objectHistoryItem)
-  }
-
-  public showHistory(): void {
-    if(this.historyStyle === 'bodyTable-show') {
-      this.historyStyle = 'bodyTable-hidden'
-    } else {
-      this.historyStyle = 'bodyTable-show'
-    }
+    this._managerService.onHistoryEvent.next(objectHistoryItem);
   }
 
 }

@@ -1,9 +1,9 @@
-import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { ManagerService } from 'src/app/services/manager.service';
-import { INodes } from 'src/environments/interface';
-import { CheckboxModel } from '../models/checkbox.model';
+import { ManagerService } from '../../../../app/services/manager.service';
+import { INodes } from '../../../../environments/interface';
+
 
 @Component({
     selector: 'app-resourses',
@@ -94,6 +94,7 @@ export class ResoursesComponent implements OnInit {
             }
 
         });
+
     }
 
     private _createForm(): void {
@@ -120,6 +121,10 @@ export class ResoursesComponent implements OnInit {
                 this.form.get('twitchChanelControl')?.setValue(item.chanelsControl);
                 this.form.get('wikiControl')?.setValue(item.wikiControl);
             })
+    }
+
+    public disableParent(): void {
+
     }
 
 

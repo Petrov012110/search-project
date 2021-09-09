@@ -12,10 +12,10 @@ import { ResoursesComponent } from './components/filter/resourses/resourses.comp
 import { InformationComponent } from './components/filter/information/information.component';
 import { SortingComponent } from './components/filter/sorting/sorting.component';
 import { ResourceService } from './services/resourses.service';
-import { LocalStorageService } from './services/localStorage.service';
+import { LocalStorageService } from './services/local-storage.service';
 import { ManagerService } from './services/manager.service';
 import { ErrorComponent } from './components/error/error.component';
-import { GlobalErrorHandlerService } from './services/globalErrorHandle.service';
+import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 
 
 @NgModule({

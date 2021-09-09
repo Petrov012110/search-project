@@ -4,16 +4,16 @@ import { Observable, of, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { IGitRepositoriesResponse, IGitUsersResponse, ITwitchChanelResponse, ITwitchResponse, ITwitchToken, IWikiResponse } from "src/environments/interface";
 import { tap, map, catchError } from 'rxjs/operators';
-import { GitRepositoryResponseModel } from "../models/gitRepository-model/git.response-model";
-import { GitRepositoryModel } from "../models/gitRepository-model/git.model";
-import { WikiResponseModel } from "../models/wiki-model/wiki.response-model";
-import { WikiModel } from "../models/wiki-model/wiki.model";
-import { TwitchCategoryResponseModel } from "../models/twitchCategory-model/twitchCategory.response-model";
-import { TwitchCategoryModel } from "../models/twitchCategory-model/twitchCategory.model";
-import { TwitchChanelResponseModel } from "../models/twitchChanels-model/twitchChanel.response-model";
-import { TwitchChanelModel } from "../models/twitchChanels-model/twitchChanel.model";
-import { GitUserResponseModel } from "../models/gitUser-model/gitUser.response-model";
-import { GitUserModel } from "../models/gitUser-model/gitUser.model";
+import { GitRepositoryResponseModel } from "../models/git-repository/git.response-model";
+import { GitRepositoryModel } from "../models/git-repository/git.model";
+import { WikiResponseModel } from "../models/wiki/wiki.response-model";
+import { WikiModel } from "../models/wiki/wiki.model";
+import { TwitchCategoryResponseModel } from "../models/twitch-category/twitchCategory.response-model";
+import { TwitchCategoryModel } from "../models/twitch-category/twitchCategory.model";
+import { TwitchChanelResponseModel } from "../models/twitch-chanels/twitchChanel.response-model";
+import { TwitchChanelModel } from "../models/twitch-chanels/twitchChanel.model";
+import { GitUserResponseModel } from "../models/git-user/gitUser.response-model";
+import { GitUserModel } from "../models/git-user/gitUser.model";
 
 
 @Injectable()
