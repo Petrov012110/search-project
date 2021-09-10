@@ -86,6 +86,10 @@
       true,
       "call-signature"
     ],
+    "workbench.colorCustomizations": {
+      "editorWarning.foreground": "#ff0",
+      "editorInfo.foreground": "#00f"
+    },
     "typedef-whitespace": {
       "options": [
         {

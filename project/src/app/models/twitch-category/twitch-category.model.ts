@@ -1,9 +1,10 @@
-import { ITwitchData } from "src/environments/interface";
+import { ITwitchData } from "../../../environments/interface";
 
 export class TwitchCategoryModel {
-    public box_art_url!: string
-    public id!: string
-    public name!: string
+    
+    public box_art_url!: string;
+    public id!: string;
+    public name!: string;
 
     constructor(data: ITwitchData) {
         if (data) {

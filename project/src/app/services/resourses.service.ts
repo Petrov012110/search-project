@@ -4,22 +4,22 @@ import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 import { environment } from "../../environments/environment";
 import { IGitRepositoriesResponse, IGitUsersResponse, ITwitchChanelResponse, ITwitchResponse, IWikiResponse } from "../../environments/interface";
-import { GitRepositoryResponseModel } from "../models/git-repository/git.response-model";
-import { GitRepositoryModel } from "../models/git-repository/git.model";
+import { GitRepositoryResponseModel } from "../models/git-repository/git-repository.response-model";
+import { GitRepositoryModel } from "../models/git-repository/git-repository.model";
 import { WikiResponseModel } from "../models/wiki/wiki.response-model";
 import { WikiModel } from "../models/wiki/wiki.model";
-import { TwitchCategoryResponseModel } from "../models/twitch-category/twitchCategory.response-model";
-import { TwitchCategoryModel } from "../models/twitch-category/twitchCategory.model";
-import { TwitchChanelResponseModel } from "../models/twitch-chanels/twitchChanel.response-model";
-import { TwitchChanelModel } from "../models/twitch-chanels/twitchChanel.model";
-import { GitUserResponseModel } from "../models/git-user/gitUser.response-model";
-import { GitUserModel } from "../models/git-user/gitUser.model";
+import { TwitchCategoryResponseModel } from "../models/twitch-category/twitch-category.response-model";
+import { TwitchCategoryModel } from "../models/twitch-category/twitch-category.model";
+import { TwitchChanelResponseModel } from "../models/twitch-chanels/twitch-chanel.response-model";
+import { TwitchChanelModel } from "../models/twitch-chanels/twitch-chanel.model";
+import { GitUserResponseModel } from "../models/git-user/git-user.response-model";
+import { GitUserModel } from "../models/git-user/git-user.model";
 
 
 @Injectable()
 export class ResourceService {
 
-    private _token = "qs1zvwtakojmcfrmoxjcszqhbli32m";
+    private token = 'qs1zvwtakojmcfrmoxjcszqhbli32m';
 
     constructor(private http: HttpClient) {
 
@@ -29,8 +29,8 @@ export class ResourceService {
 
         return this.http.get<ITwitchResponse>(`https://api.twitch.tv/helix/searc/categories?query=${data}`, {
             headers: {
-                "Client-Id": `${environment.clientId}`,
-                "Authorization": `Bearer ${this._token}`
+                'Client-Id': `${environment.clientId}`,
+                'Authorization': `Bearer ${this.token}`
             }
         }).pipe(
             map((response: TwitchCategoryResponseModel): TwitchCategoryModel[] => {
@@ -43,8 +43,8 @@ export class ResourceService {
 
         return this.http.get<ITwitchChanelResponse>(`https://api.twitch.tv/helix/search/channels?query=${data}`, {
             headers: {
-                "Client-Id": `${environment.clientId}`,
-                "Authorization": `Bearer ${this._token}`
+                'Client-Id': `${environment.clientId}`,
+                'Authorization': `Bearer ${this.token}`
             }
         }).pipe(
             map((response: TwitchChanelResponseModel): TwitchChanelModel[] => {

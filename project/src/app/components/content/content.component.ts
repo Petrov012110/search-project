@@ -9,11 +9,9 @@ import { ManagerService } from '../../services/manager.service';
 })
 export class ContentComponent implements OnInit {
 
-  constructor(private _managerService: ManagerService) {
-    
-   }
+  constructor(private _managerService: ManagerService) { }
 
-  public tableData: ITable[] = [];  
+  public tableData: ITable[] = [];
 
   public ngOnInit(): void {
     this._subscribeOnServerAnswerEvent();
