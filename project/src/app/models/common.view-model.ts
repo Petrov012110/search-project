@@ -1,5 +1,6 @@
 import { GitRepositoryModel } from "./git-repository/git-repository.model";
 import { GitUserModel } from "./git-user/git-user.model";
+import { ParentModel } from "./parent.model";
 import { TwitchCategoryModel } from "./twitch-category/twitch-category.model";
 import { TwitchChanelModel } from "./twitch-chanels/twitch-chanel.model";
 import { WikiModel } from "./wiki/wiki.model";
@@ -10,7 +11,7 @@ export class CommonViewModel {
     public content!: string;
     public resourse!: string;
 
-    constructor(data: GitRepositoryModel | TwitchCategoryModel | TwitchChanelModel | GitUserModel | WikiModel) {
+    constructor(data: ParentModel) {
 
         if (data instanceof GitRepositoryModel) {
             this.name = data.name,

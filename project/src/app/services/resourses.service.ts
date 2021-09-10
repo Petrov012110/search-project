@@ -14,6 +14,7 @@ import { TwitchChanelResponseModel } from "../models/twitch-chanels/twitch-chane
 import { TwitchChanelModel } from "../models/twitch-chanels/twitch-chanel.model";
 import { GitUserResponseModel } from "../models/git-user/git-user.response-model";
 import { GitUserModel } from "../models/git-user/git-user.model";
+import { ParentModel } from "../models/parent.model";
 
 
 @Injectable()
@@ -39,7 +40,7 @@ export class ResourceService {
         )
     }
 
-    public getTwitchChannels(data: string): Observable<TwitchChanelModel[]> {
+    public getTwitchChannels(data: string): Observable<ParentModel[]> {
 
         return this.http.get<ITwitchChanelResponse>(`https://api.twitch.tv/helix/search/channels?query=${data}`, {
             headers: {
@@ -53,7 +54,7 @@ export class ResourceService {
         )
     }
 
-    public getGitRepositories(data: string): Observable<GitRepositoryModel[]> {
+    public getGitRepositories(data: string): Observable<ParentModel[]> {
 
         return this.http.get<IGitRepositoriesResponse>(`https://api.github.com/search/repositories?q=${data}`)
             .pipe(
@@ -64,7 +65,7 @@ export class ResourceService {
 
     }
 
-    public getGitUsers(data: string): Observable<GitUserModel[]> {
+    public getGitUsers(data: string): Observable<ParentModel[]> {
 
         return this.http.get<IGitUsersResponse>(`https://api.github.com/search/users?q=${data}`)
             .pipe(
@@ -75,7 +76,7 @@ export class ResourceService {
 
     }
 
-    public getWikiData(data: string): Observable<WikiModel[]> {
+    public getWikiData(data: string): Observable<ParentModel[]> {
 
         return this.http.get<IWikiResponse>(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&origin=*&srsearch=${data}&srlimit=30`)
             .pipe(

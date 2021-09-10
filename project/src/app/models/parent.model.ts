@@ -1,4 +1,4 @@
-export class ParentModule {
+export class ParentModel {
     public name!: string;
 
 

@@ -53,7 +53,7 @@ export class ResoursesComponent implements OnInit {
         this._createForm();
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
 
         this.setHistoryControlsValue();
 
@@ -63,20 +63,20 @@ export class ResoursesComponent implements OnInit {
             )
             .subscribe(el => this._managerService.onCheckboxEvent.next(this.form));
 
-        this.subscribtionFormControl('gitControl', "gitRepositoryControl", "gitUserControl");
-        this.subscribtionFormControl('twitchControl', "twitchCategoryControl", "twitchChanelControl");
+        this.subscribtionFormControl('gitControl', 'gitRepositoryControl', 'gitUserControl');
+        this.subscribtionFormControl('twitchControl', 'twitchCategoryControl', 'twitchChanelControl');
 
     }
 
     private _createForm(): void {
         this.form = new FormGroup({
-            "gitControl": new FormControl(),
-            "gitRepositoryControl": new FormControl(),
-            "gitUserControl": new FormControl(),
-            "twitchControl": new FormControl(),
-            "twitchCategoryControl": new FormControl(),
-            "twitchChanelControl": new FormControl(),
-            "wikiControl": new FormControl(),
+            'gitControl': new FormControl(),
+            'gitRepositoryControl': new FormControl(),
+            'gitUserControl': new FormControl(),
+            'twitchControl': new FormControl(),
+            'twitchCategoryControl': new FormControl(),
+            'twitchChanelControl': new FormControl(),
+            'wikiControl': new FormControl(),
         });
 
     }

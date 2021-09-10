@@ -14,6 +14,7 @@ import { ITable } from '../../../environments/interface';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ManagerService } from '../../services/manager.service';
 import { ResourceService } from '../../services/resourses.service';
+import { ParentModel } from 'src/app/models/parent.model';
 
 
 @Component({
@@ -63,13 +64,13 @@ export class SearchComponent implements OnInit, OnDestroy {
                 }),
                 takeUntil(this._unsubscriber)
 
-            ).subscribe((response: (TwitchCategoryModel[] | GitRepositoryModel[] | WikiModel[] | TwitchChanelModel[] | GitUserModel[])[]) => {
+            ).subscribe((response: (ParentModel[])[]) => {
 
                 const tableItems: ITable[] = [];
                 let counter = 0;
 
                 response.forEach(item => {
-                    item.forEach((el: TwitchCategoryModel | GitRepositoryModel | WikiModel | TwitchChanelModel | GitUserModel) => {
+                    item.forEach((el: ParentModel) => {
                         tableItems.push(new CommonViewModel(el));
                         counter++;
                     })
@@ -84,9 +85,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     }
 
-    public getArrayOfObservables(filter: ControlsViewModel, input: string): (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] {
+    public getArrayOfObservables(filter: ControlsViewModel, input: string): Observable<ParentModel[]>[] {
 
-        let arrOfObservables: (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] = [];
+        let arrOfObservables: Observable<ParentModel[]>[] = [];
 
         if (filter) {
             if (filter.wikiControl) {

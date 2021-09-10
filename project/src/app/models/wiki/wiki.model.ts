@@ -1,19 +1,21 @@
 import { IWikiData } from "../../../environments/interface";
+import { ParentModel } from "../parent.model";
 
-export class WikiModel {
+export class WikiModel extends ParentModel {
     public snippet!: string;
     public title!: string;
 
     constructor(data: IWikiData) {
-        if(data) {
-            this.snippet = this.creteText(data.snippet) ;
+        super();
+        if (data) {
+            this.snippet = this.creteText(data.snippet);
             this.title = data.title;
         }
     }
 
     public creteText(value: string): string {
-        let div = document.createElement("div")
-        div.innerHTML = value
-        return div.innerText
+        const div = document.createElement('div');
+        div.innerHTML = value;
+        return div.innerText;
     }
 }
