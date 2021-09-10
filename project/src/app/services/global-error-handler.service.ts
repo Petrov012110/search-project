@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorHandler, Injectable, NgZone } from "@angular/core";
-import { BehaviorSubject, Subject } from "rxjs";
+import { Subject } from "rxjs";
 
 @Injectable()
 export class GlobalErrorHandlerService implements ErrorHandler {
@@ -12,12 +12,12 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     }
 
     public handleError(error: any): void {
+        
         this._ngZone.run(() => {
             if (error instanceof HttpErrorResponse) {
 
                 console.error('Backend returned status code: ', error.status);
                 console.error('Response body:', error.message);
-
 
             } else {
 

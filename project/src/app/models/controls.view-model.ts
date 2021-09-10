@@ -11,6 +11,7 @@ export class ControlsViewModel {
         public repositoriesControl!: boolean;
     
     constructor(data: FormGroup) {
+
         if(data) {
             this.wikiControl = data.controls['wikiControl'].value,
             this.twitchControl = data.controls['twitchControl'].value,
@@ -20,5 +21,6 @@ export class ControlsViewModel {
             this.usersControl = data.controls['gitUserControl'].value,
             this.repositoriesControl = data.controls['gitRepositoryControl'].value
         }
+        
     }
 }

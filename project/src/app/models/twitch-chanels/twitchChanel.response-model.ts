@@ -1,4 +1,4 @@
-import { ITwitchChanelResponse, ITwitchCnanelData, ITwitchResponse } from "src/environments/interface";
+import { ITwitchChanelResponse, ITwitchCnanelData, ITwitchResponse } from "../../../environments/interface";
 
 export class TwitchChanelResponseModel {
     public data!: ITwitchCnanelData[];

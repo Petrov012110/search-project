@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ResourceService } from './services/resourses.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +9,18 @@ export class AppComponent {
 
   public bntStyle = 'show-history';
 
-  constructor ( ) { }
+  constructor() { 
+    
+  }
 
   public showHistory(): void {
-    if(this.bntStyle == 'show-history') {
-      this.bntStyle = 'hide-history'
+
+    if (this.bntStyle == 'show-history') {
+      this.bntStyle = 'hide-history';
     } else {
-      this.bntStyle = 'show-history'
+      this.bntStyle = 'show-history';
     }
 
   }
-  
+
 }

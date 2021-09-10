@@ -1,5 +1,4 @@
-import { IWikiData } from "src/environments/interface";
-import { WikiResponseModel } from "./wiki.response-model";
+import { IWikiData } from "../../../environments/interface";
 
 export class WikiModel {
     public snippet!: string;

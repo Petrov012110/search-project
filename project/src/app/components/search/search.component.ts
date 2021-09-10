@@ -3,14 +3,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, Observable, Subject, throwError } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
-import { CommonViewModel } from 'src/app/models/common.view-model';
-import { ControlsViewModel } from 'src/app/models/controls.view-model';
-import { GitRepositoryModel } from 'src/app/models/git-repository/git.model';
-import { GitUserModel } from 'src/app/models/git-user/gitUser.model';
-import { TwitchCategoryModel } from 'src/app/models/twitch-category/twitchCategory.model';
-import { TwitchChanelModel } from 'src/app/models/twitch-chanels/twitchChanel.model';
-import { WikiModel } from 'src/app/models/wiki/wiki.model';
-import { ITable } from 'src/environments/interface';
+import { CommonViewModel } from '../../../app/models/common.view-model';
+import { ControlsViewModel } from '../../../app/models/controls.view-model';
+import { GitRepositoryModel } from '../../../app/models/git-repository/git.model';
+import { GitUserModel } from '../../../app/models/git-user/gitUser.model';
+import { TwitchCategoryModel } from '../../../app/models/twitch-category/twitchCategory.model';
+import { TwitchChanelModel } from '../../../app/models/twitch-chanels/twitchChanel.model';
+import { WikiModel } from '../../../app/models/wiki/wiki.model';
+import { ITable } from '../../../environments/interface';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ManagerService } from '../../services/manager.service';
 import { ResourceService } from '../../services/resourses.service';
@@ -21,28 +21,22 @@ import { ResourceService } from '../../services/resourses.service';
     templateUrl: './search.component.html',
     styleUrls: ['./style/search.component.scss']
 })
+
 export class SearchComponent implements OnInit, OnDestroy {
 
-
-    public text: string = "";
     public inputForm: FormGroup;
-    public arrData: object[] = []
-    public arrOfInputValue: string[] = [];
-    public checkboxes!: FormGroup;
-    public errorMessage: string;
-    private _unsubscriber: Subject<void> = new Subject<void>();
     public controls!: ControlsViewModel;
+    private _unsubscriber: Subject<void> = new Subject<void>();
 
     constructor(
         private _resours: ResourceService,
         private _storage: LocalStorageService,
         private _managerService: ManagerService,
     ) {
-        this.errorMessage = "Задайте фильтр"
+
         this.inputForm = new FormGroup({
             "inputControl": new FormControl("", Validators.maxLength(15))
         });
-
 
     }
 
@@ -57,17 +51,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     public getData(): void {
-        // throw new Error('test error')
 
         if (!this.inputForm.controls['inputControl'].value) {
             return;
         }
 
-        forkJoin(this.arrayQuery(this.controls, this.inputForm.controls['inputControl'].value))
+        forkJoin(this.getArrayOfObservables(this.controls, this.inputForm.controls['inputControl'].value))
             .pipe(
-
                 catchError((error: HttpErrorResponse) => {
-                    // this._handleErrorService.setError(error);
                     return throwError(error);
                 }),
                 takeUntil(this._unsubscriber)
@@ -75,14 +66,11 @@ export class SearchComponent implements OnInit, OnDestroy {
             ).subscribe((response: (TwitchCategoryModel[] | GitRepositoryModel[] | WikiModel[] | TwitchChanelModel[] | GitUserModel[])[]) => {
 
                 const tableItems: ITable[] = [];
-                let counter = 0
+                let counter = 0;
 
                 response.forEach(item => {
                     item.forEach((el: TwitchCategoryModel | GitRepositoryModel | WikiModel | TwitchChanelModel | GitUserModel) => {
                         tableItems.push(new CommonViewModel(el));
-
-
-
                         counter++;
                     })
                 });
@@ -96,26 +84,26 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     }
 
-    public arrayQuery(filter: ControlsViewModel, input: string): (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] {
+    public getArrayOfObservables(filter: ControlsViewModel, input: string): (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] {
 
-        let arr: (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] = [];
+        let arrOfObservables: (Observable<TwitchCategoryModel[]> | Observable<GitRepositoryModel[]> | Observable<WikiModel[]> | Observable<TwitchChanelModel[]> | Observable<GitUserModel[]>)[] = [];
 
         if (filter) {
             if (filter.wikiControl) {
-                arr.push(this._resours.getWikiData(input));
+                arrOfObservables.push(this._resours.getWikiData(input));
             }
             if (filter.gitControl) {
                 if (filter.repositoriesControl) {
                     /**
                      * репозиторий 
                      */
-                    arr.push(this._resours.getGitRepositories(input));
+                    arrOfObservables.push(this._resours.getGitRepositories(input));
                 }
                 if (filter.usersControl) {
                     /**
                      * запрос на юзера 
                      */
-                    arr.push(this._resours.getGitUsers(input));
+                    arrOfObservables.push(this._resours.getGitUsers(input));
                 }
             }
             if (filter.twitchControl) {
@@ -123,18 +111,19 @@ export class SearchComponent implements OnInit, OnDestroy {
                     /**
                      * категории
                      */
-                    arr.push(this._resours.getTwitchCategories(input));
+                    arrOfObservables.push(this._resours.getTwitchCategories(input));
                 }
                 if (filter.chanelsControl) {
                     /**
                      * каналы
                      */
-                    arr.push(this._resours.getTwitchChannels(input));
+                    arrOfObservables.push(this._resours.getTwitchChannels(input));
                 }
             }
 
         }
-        return arr;
+
+        return arrOfObservables;
     }
 
     public getValueCheckboxes(): void {

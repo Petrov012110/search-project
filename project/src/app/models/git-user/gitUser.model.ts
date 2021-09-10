@@ -1,4 +1,4 @@
-import { IGitUserData } from "src/environments/interface";
+import { IGitUserData } from "../../../environments/interface";
 
 export class GitUserModel {
     login!: string;

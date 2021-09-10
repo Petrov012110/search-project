@@ -5,11 +5,13 @@ import { TwitchChanelModel } from "./twitch-chanels/twitchChanel.model";
 import { WikiModel } from "./wiki/wiki.model";
 
 export class CommonViewModel {
-    public name: string = " -";
-    public content: string = " -";
-    public resourse: string = " -";
+
+    public name!: string;
+    public content!: string;
+    public resourse!: string;
 
     constructor(data: GitRepositoryModel | TwitchCategoryModel | TwitchChanelModel | GitUserModel | WikiModel) {
+
         if (data instanceof GitRepositoryModel) {
             this.name = data.name
             this.content = data.html_url
@@ -31,5 +33,6 @@ export class CommonViewModel {
             this.content = data.snippet;
             this.resourse = "Wikipedia"
         }
+        
     }
 }

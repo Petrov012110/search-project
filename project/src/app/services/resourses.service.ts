@@ -1,9 +1,9 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
-import { environment } from "src/environments/environment";
-import { IGitRepositoriesResponse, IGitUsersResponse, ITwitchChanelResponse, ITwitchResponse, ITwitchToken, IWikiResponse } from "src/environments/interface";
-import { tap, map, catchError } from 'rxjs/operators';
+import { Observable } from "rxjs";
+import { map } from 'rxjs/operators';
+import { environment } from "../../environments/environment";
+import { IGitRepositoriesResponse, IGitUsersResponse, ITwitchChanelResponse, ITwitchResponse, IWikiResponse } from "../../environments/interface";
 import { GitRepositoryResponseModel } from "../models/git-repository/git.response-model";
 import { GitRepositoryModel } from "../models/git-repository/git.model";
 import { WikiResponseModel } from "../models/wiki/wiki.response-model";
@@ -19,11 +19,11 @@ import { GitUserModel } from "../models/git-user/gitUser.model";
 @Injectable()
 export class ResourceService {
 
+    private _token = "qs1zvwtakojmcfrmoxjcszqhbli32m";
+
     constructor(private http: HttpClient) {
 
     }
-
-    private _token = "qs1zvwtakojmcfrmoxjcszqhbli32m"
 
     public getTwitchCategories(data: string): Observable<TwitchCategoryModel[]> {
 

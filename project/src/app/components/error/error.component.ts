@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { delay, tap } from 'rxjs/operators';
-import { GlobalErrorHandlerService } from 'src/app/services/global-error-handler.service';
+import { GlobalErrorHandlerService } from '../../../app/services/global-error-handler.service';
 
 @Component({
     selector: 'app-error',

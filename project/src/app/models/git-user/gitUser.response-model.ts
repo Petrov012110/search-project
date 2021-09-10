@@ -1,4 +1,4 @@
-import { IGitUserData, IGitUsersResponse } from "src/environments/interface";
+import { IGitUserData, IGitUsersResponse } from "../../../environments/interface";
 
 export class GitUserResponseModel {
     public incomplete_results: boolean = false;

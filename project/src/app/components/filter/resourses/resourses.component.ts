@@ -63,37 +63,8 @@ export class ResoursesComponent implements OnInit {
             )
             .subscribe(el => this._managerService.onCheckboxEvent.next(this.form));
 
-        this.form.get('gitControl')?.valueChanges.subscribe(selectedValue => {
-
-            if (selectedValue) {
-                this.form.get("gitRepositoryControl")?.enable();
-                this.form.get("gitRepositoryControl")?.setValue(true);
-                this.form.get("gitUserControl")?.enable();
-                this.form.get("gitUserControl")?.setValue(true);
-            } else {
-                this.form.get("gitRepositoryControl")?.disable();
-                this.form.get("gitRepositoryControl")?.setValue(false);
-                this.form.get("gitUserControl")?.disable();
-                this.form.get("gitUserControl")?.setValue(false);
-            }
-
-        });
-
-        this.form.get('twitchControl')?.valueChanges.subscribe(selectedValue => {
-
-            if (selectedValue) {
-                this.form.get("twitchCategoryControl")?.enable();
-                this.form.get("twitchCategoryControl")?.setValue(true);
-                this.form.get("twitchChanelControl")?.enable();
-                this.form.get("twitchChanelControl")?.setValue(true);
-            } else {
-                this.form.get("twitchCategoryControl")?.disable();
-                this.form.get("twitchCategoryControl")?.setValue(false);
-                this.form.get("twitchChanelControl")?.disable();
-                this.form.get("twitchChanelControl")?.setValue(false);
-            }
-
-        });
+        this.subscribtionFormControl('gitControl', "gitRepositoryControl", "gitUserControl");
+        this.subscribtionFormControl('twitchControl', "twitchCategoryControl", "twitchChanelControl");
 
     }
 
@@ -110,6 +81,24 @@ export class ResoursesComponent implements OnInit {
 
     }
 
+    public subscribtionFormControl(parentControl: string, childeControlFirst: string, childeControlSecont: string): void {
+        this.form.get(parentControl)?.valueChanges.subscribe(selectedValue => {
+
+            if (selectedValue) {
+                this.form.get(childeControlFirst)?.enable();
+                this.form.get(childeControlFirst)?.setValue(true);
+                this.form.get(childeControlSecont)?.enable();
+                this.form.get(childeControlSecont)?.setValue(true);
+            } else {
+                this.form.get(childeControlFirst)?.disable();
+                this.form.get(childeControlFirst)?.setValue(false);
+                this.form.get(childeControlSecont)?.disable();
+                this.form.get(childeControlSecont)?.setValue(false);
+            }
+
+        });
+    }
+
     public setHistoryControlsValue(): void {
         this._managerService.onHistoryControlsEvent
             .subscribe(item => {
@@ -120,14 +109,7 @@ export class ResoursesComponent implements OnInit {
                 this.form.get('twitchCategoryControl')?.setValue(item.categoriesControl);
                 this.form.get('twitchChanelControl')?.setValue(item.chanelsControl);
                 this.form.get('wikiControl')?.setValue(item.wikiControl);
-            })
+            });
     }
-
-    public disableParent(): void {
-
-    }
-
-
-
 
 }

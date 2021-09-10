@@ -1,4 +1,4 @@
-import { ITwitchCnanelData } from "src/environments/interface";
+import { ITwitchCnanelData } from "../../../environments/interface";
 
 export class TwitchChanelModel {
     broadcaster_language!: string;

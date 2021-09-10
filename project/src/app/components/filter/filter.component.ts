@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ManagerService } from 'src/app/services/manager.service';
+import { ManagerService } from '../../../app/services/manager.service';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -11,12 +11,10 @@ export class FilterComponent implements OnInit {
 
   constructor(private _managerService: ManagerService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this._managerService.onCounterEvent
       .subscribe(value => {
-        this.lengthContent = value
+        this.lengthContent = value;
       })
   }
-
-
 }

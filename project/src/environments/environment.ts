@@ -2,12 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { IEniroment } from "./interface";
+import { IEnviroment } from "./interface";
 
-export const environment: IEniroment = {
+export const environment: IEnviroment = {
   production: false,
   clientId: "u4bc8k2muq2vms0dw3n1seg1acmsmm",
-  client_secret: "qidntfvbud0od92iw9y98ksklckrl2"
+  client_secret: "qidntfvbud0od92iw9y98ksklckrl2",
 };
 
 /*

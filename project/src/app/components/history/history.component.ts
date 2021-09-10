@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HistoryItemViewModel } from 'src/app/models/history-item.model';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { ManagerService } from 'src/app/services/manager.service';
-
+import { HistoryItemViewModel } from '../../../app/models/history-item.model';
+import { LocalStorageService } from '../../../app/services/local-storage.service';
+import { ManagerService } from '../../../app/services/manager.service';
 
 @Component({
   selector: 'app-history',
@@ -11,7 +10,7 @@ import { ManagerService } from 'src/app/services/manager.service';
 })
 export class HistoryComponent implements OnInit {
 
-  arrOfInputValue: HistoryItemViewModel[] = [];
+  public arrOfInputValue: HistoryItemViewModel[] = [];
 
   constructor(
     private _storage: LocalStorageService,
@@ -26,16 +25,16 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscribeOnSearchEvent();
   }
 
-  private subscribeOnSearchEvent(): void {
+  public subscribeOnSearchEvent(): void {
 
     this._managerService.onSearchEvent
       .subscribe(res => {
 
-        if(this.arrOfInputValue.length+1 > 15) {
+        if(this.arrOfInputValue.length + 1 > 15) {
           this.arrOfInputValue.splice(0, 1);
         }
 

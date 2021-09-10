@@ -1,6 +1,4 @@
-import { IGitRepositoryData } from "src/environments/interface";
-import { GitRepositoryResponseModel } from "./git.response-model";
-
+import { IGitRepositoryData } from "../../../environments/interface";
 
 export class GitRepositoryModel {
     public html_url!: string;

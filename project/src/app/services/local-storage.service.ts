@@ -1,11 +1,7 @@
 import { Injectable } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import { Observable, of } from "rxjs";
 import { ControlsViewModel } from "../models/controls.view-model";
 import { HistoryItemViewModel } from "../models/history-item.model";
-
-
-
 
 @Injectable()
 export class LocalStorageService {
@@ -28,25 +24,20 @@ export class LocalStorageService {
     }
 
     public getHistoryControls(objectHistoryItem: HistoryItemViewModel): ControlsViewModel {
-        let c: Array<HistoryItemViewModel> = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+
+        let arrayOfControlsFromHistory: Array<HistoryItemViewModel> = JSON.parse(localStorage.getItem('searchHistory') || '[]');
         
-        c.forEach(item => {
+        arrayOfControlsFromHistory.forEach(item => {
             if (item.input === objectHistoryItem.input  && item.controls && item.date == objectHistoryItem.date) {
                
-                this.controls = item.controls
+                this.controls = item.controls;
                 
             } 
-        })
-        return this.controls
+        });
+
+        return this.controls;
 
     }
 
-    public cutInputValue(item: string): string {
-        if (item.length > 11) {
-            return `${item.substring(0, 11)}...`;
-        } else {
-            return item;
-        }
-    }
 
 }

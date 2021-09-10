@@ -17,9 +17,7 @@ import { ManagerService } from './services/manager.service';
 import { ErrorComponent } from './components/error/error.component';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 
-
-@NgModule({
-  declarations: [
+const components: any[] = [
     AppComponent,
     HistoryComponent,
     FilterComponent,
@@ -29,22 +27,33 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
     InformationComponent,
     SortingComponent,
     ErrorComponent,
-  ],
-  imports: [
+];
+
+const imports: any[] = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     TreeModule
-    
-  ],
-  providers: [
+];
+
+const providers: any[] = [
     ResourceService,
     LocalStorageService,
     ManagerService,
     GlobalErrorHandlerService,
-    { provide: ErrorHandler, useExisting: GlobalErrorHandlerService }  
-  ],
-  bootstrap: [AppComponent]
+    { provide: ErrorHandler, useExisting: GlobalErrorHandlerService }
+]
+@NgModule({
+    declarations: [
+        ...components
+    ],
+    imports: [
+        ...imports
+    ],
+    providers: [
+        ...providers
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

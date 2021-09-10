@@ -1,4 +1,4 @@
-export interface IEniroment {
+export interface IEnviroment {
     clientId: string,
     production: boolean,
     client_secret: string
