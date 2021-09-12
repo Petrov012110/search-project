@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { EControls } from 'src/environments/enums';
 import { ManagerService } from '../../../../app/services/manager.service';
 import { INodes } from '../../../../environments/interface';
 
@@ -50,7 +51,20 @@ export class ResoursesComponent implements OnInit {
     ];
 
     constructor(private _managerService: ManagerService) {
-        this._createForm();
+        this.createForm();
+    }
+
+    private createForm(): void {
+        this.form = new FormGroup({
+            gitControl: new FormControl(),
+            gitRepositoryControl: new FormControl(),
+            gitUserControl: new FormControl(),
+            twitchControl: new FormControl(),
+            twitchCategoryControl: new FormControl(),
+            twitchChanelControl: new FormControl(),
+            wikiControl: new FormControl(),
+        });
+
     }
 
     public ngOnInit(): void {
@@ -63,23 +77,11 @@ export class ResoursesComponent implements OnInit {
             )
             .subscribe(el => this._managerService.onCheckboxEvent.next(this.form));
 
-        this.subscribtionFormControl('gitControl', 'gitRepositoryControl', 'gitUserControl');
-        this.subscribtionFormControl('twitchControl', 'twitchCategoryControl', 'twitchChanelControl');
+        this.subscribtionFormControl(EControls.gitControl, EControls.gitRepositoryControl, EControls.gitUserControl);
+        this.subscribtionFormControl(EControls.twitchControl, EControls.twitchCategoryControl, EControls.twitchChanelControl);
 
     }
 
-    private _createForm(): void {
-        this.form = new FormGroup({
-            'gitControl': new FormControl(),
-            'gitRepositoryControl': new FormControl(),
-            'gitUserControl': new FormControl(),
-            'twitchControl': new FormControl(),
-            'twitchCategoryControl': new FormControl(),
-            'twitchChanelControl': new FormControl(),
-            'wikiControl': new FormControl(),
-        });
-
-    }
 
     public subscribtionFormControl(parentControl: string, childeControlFirst: string, childeControlSecont: string): void {
         this.form.get(parentControl)?.valueChanges.subscribe(selectedValue => {
@@ -102,13 +104,13 @@ export class ResoursesComponent implements OnInit {
     public setHistoryControlsValue(): void {
         this._managerService.onHistoryControlsEvent
             .subscribe(item => {
-                this.form.get('gitControl')?.setValue(item.gitControl);
-                this.form.get('gitRepositoryControl')?.setValue(item.repositoriesControl);
-                this.form.get('gitUserControl')?.setValue(item.usersControl);
-                this.form.get('twitchControl')?.setValue(item.twitchControl);
-                this.form.get('twitchCategoryControl')?.setValue(item.categoriesControl);
-                this.form.get('twitchChanelControl')?.setValue(item.chanelsControl);
-                this.form.get('wikiControl')?.setValue(item.wikiControl);
+                this.form.get(EControls.gitControl)?.setValue(item.gitControl);
+                this.form.get(EControls.gitRepositoryControl)?.setValue(item.repositoriesControl);
+                this.form.get(EControls.gitUserControl)?.setValue(item.usersControl);
+                this.form.get(EControls.twitchControl)?.setValue(item.twitchControl);
+                this.form.get(EControls.twitchCategoryControl)?.setValue(item.categoriesControl);
+                this.form.get(EControls.twitchChanelControl)?.setValue(item.chanelsControl);
+                this.form.get(EControls.wikiControl)?.setValue(item.wikiControl);
             });
     }
 

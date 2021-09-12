@@ -1,7 +1,7 @@
 import { IWikiData } from "../../../environments/interface";
-import { ParentModel } from "../parent.model";
+import { ParentResourseModel } from "../parent-resourse.model";
 
-export class WikiModel extends ParentModel {
+export class WikiModel extends ParentResourseModel {
     public snippet!: string;
     public title!: string;
 

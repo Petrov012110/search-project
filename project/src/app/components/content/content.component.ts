@@ -14,10 +14,10 @@ export class ContentComponent implements OnInit {
   public tableData: ITable[] = [];
 
   public ngOnInit(): void {
-    this._subscribeOnServerAnswerEvent();
+    this.subscribeOnServerAnswerEvent();
   }
 
-  private _subscribeOnServerAnswerEvent(): void {
+  private subscribeOnServerAnswerEvent(): void {
     this._managerService.onServerAnswerEvent
       .subscribe(res => this.tableData = res);
   }

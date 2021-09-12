@@ -1,7 +1,7 @@
 import { IGitRepositoryData, IGitRepositoriesResponse } from "../../../environments/interface";
 
 export class GitRepositoryResponseModel {
-    public incomplete_results: boolean = false;
+    public incomplete_results = false;
     public items: IGitRepositoryData[] = [];
     public total_count!: number;
 

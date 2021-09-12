@@ -1,15 +1,14 @@
 import { IGitRepositoryData } from "../../../environments/interface";
-import { ParentModel } from "../parent.model";
+import { ParentResourseModel } from "../parent-resourse.model";
 
-export class GitRepositoryModel extends ParentModel {
-    public html_url!: string;
+export class GitRepositoryModel extends ParentResourseModel {
+    public htmlUrl!: string;
     public id!: number;
-    public name!: string;
 
     constructor(data: IGitRepositoryData) {
         super();
         if (data) {
-            this.html_url = data.html_url;
+            this.htmlUrl = data.html_url;
             this.id = data.id;
             this.name = data.name;
         }

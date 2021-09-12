@@ -1,7 +1,7 @@
 import { IGitUserData, IGitUsersResponse } from "../../../environments/interface";
 
 export class GitUserResponseModel {
-    public incomplete_results: boolean = false;
+    public incomplete_results = false;
     public items: IGitUserData[] = [];
     public total_count!: number;
 

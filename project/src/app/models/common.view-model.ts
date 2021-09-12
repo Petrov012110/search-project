@@ -1,6 +1,6 @@
 import { GitRepositoryModel } from "./git-repository/git-repository.model";
 import { GitUserModel } from "./git-user/git-user.model";
-import { ParentModel } from "./parent.model";
+import { ParentResourseModel } from "./parent-resourse.model";
 import { TwitchCategoryModel } from "./twitch-category/twitch-category.model";
 import { TwitchChanelModel } from "./twitch-chanels/twitch-chanel.model";
 import { WikiModel } from "./wiki/wiki.model";
@@ -11,11 +11,11 @@ export class CommonViewModel {
     public content!: string;
     public resourse!: string;
 
-    constructor(data: ParentModel) {
+    constructor(data: ParentResourseModel) {
 
         if (data instanceof GitRepositoryModel) {
             this.name = data.name,
-            this.content = data.html_url,
+            this.content = data.htmlUrl,
             this.resourse = 'Git (repository)'
         } else if (data instanceof GitUserModel) {
             this.name = data.login,
@@ -23,11 +23,11 @@ export class CommonViewModel {
             this.resourse = 'Git (user)'
         } else if (data instanceof TwitchCategoryModel) {
             this.name = data.name,
-            this.content = data.box_art_url,
+            this.content = data.boxArtUrl,
             this.resourse = 'Twitch (category)'
         } else if (data instanceof TwitchChanelModel) {
-            this.name = data.display_name,
-            this.content = data.game_name,
+            this.name = data.displayName,
+            this.content = data.gameName,
             this.resourse = 'Twitch (chanel)'
         } else if (data instanceof WikiModel) {
             this.name = data.title,

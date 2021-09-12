@@ -5,14 +5,11 @@ import { Component, Input, OnInit} from '@angular/core';
   templateUrl: './information.component.html',
   styleUrls: ['./style/information.component.scss']
 })
-export class InformationComponent implements OnInit {
+export class InformationComponent {
 
   @Input()
   public contentLength!: number;
 
   constructor() { }
-
-  public ngOnInit(): void {
-  }
 
 }

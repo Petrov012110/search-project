@@ -1,7 +1,7 @@
 import { IWikiData, IWikiResponse } from "../../../environments/interface";
 
 export class WikiResponseModel {
-    public batchcomplete: string = "";
+    public batchcomplete: string = '';
     public continue!: object;
     public query!: {
         search: IWikiData[]

@@ -6,7 +6,7 @@ import { GlobalErrorHandlerService } from '../../../app/services/global-error-ha
 @Component({
     selector: 'app-error',
     templateUrl: './error.component.html',
-    styleUrls: ['./error.component.scss']
+    styleUrls: ['./style/error.component.scss']
 })
 export class ErrorComponent implements OnInit {
 

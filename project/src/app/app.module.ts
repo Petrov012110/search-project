@@ -10,7 +10,6 @@ import { SearchComponent } from './components/search/search.component';
 import { ContentComponent } from './components/content/content.component';
 import { ResoursesComponent } from './components/filter/resourses/resourses.component';
 import { InformationComponent } from './components/filter/information/information.component';
-import { SortingComponent } from './components/filter/sorting/sorting.component';
 import { ResourceService } from './services/resourses.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { ManagerService } from './services/manager.service';
@@ -25,7 +24,6 @@ const components: any[] = [
     ContentComponent,
     ResoursesComponent,
     InformationComponent,
-    SortingComponent,
     ErrorComponent,
 ];
 
