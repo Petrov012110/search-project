@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ITable } from '../../../environments/interface';
+import { ICommonViewModel } from '../../../environments/interface';
 import { ManagerService } from '../../services/manager.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class ContentComponent implements OnInit {
 
   constructor(private _managerService: ManagerService) { }
 
-  public tableData: ITable[] = [];
+  public tableData: ICommonViewModel[] = [];
 
   public ngOnInit(): void {
     this.subscribeOnServerAnswerEvent();

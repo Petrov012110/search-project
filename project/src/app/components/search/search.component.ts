@@ -1,15 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { forkJoin, Observable, Subject, throwError } from 'rxjs';
-import { catchError, takeUntil, tap } from 'rxjs/operators';
-import { CommonViewModel } from '../../../app/models/common.view-model';
 import { ControlsViewModel } from '../../../app/models/controls.view-model';
-import { ITable } from '../../../environments/interface';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ManagerService } from '../../services/manager.service';
 import { ResourceService } from '../../services/resourses.service';
-import { ParentResourseModel } from '../../../app/models/parent-resourse.model';
 
 
 @Component({
@@ -18,11 +12,10 @@ import { ParentResourseModel } from '../../../app/models/parent-resourse.model';
     styleUrls: ['./style/search.component.scss']
 })
 
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements OnInit {
 
     public inputForm: FormGroup;
     public controls!: ControlsViewModel;
-    private _unsubscriber: Subject<void> = new Subject<void>();
 
     constructor(
         private _resours: ResourceService,
@@ -41,10 +34,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.getValueHistory();
     }
 
-    public ngOnDestroy(): void {
-        this._unsubscriber.next();
-        this._unsubscriber.complete();
-    }
 
     public getData(): void {
 
@@ -52,74 +41,12 @@ export class SearchComponent implements OnInit, OnDestroy {
             return;
         }
 
-        forkJoin(this.getArrayOfObservables(this.controls, this.inputForm.controls.inputControl.value))
-            .pipe(
-                catchError((error: HttpErrorResponse) => {
-                    return throwError(error);
-                }),
-                takeUntil(this._unsubscriber)
-
-            ).subscribe((response: (ParentResourseModel[])[]) => {
-
-                const tableItems: ITable[] = [];
-                let counter = 0;
-
-                response.forEach(item => {
-                    item.forEach((el: ParentResourseModel) => {
-                        tableItems.push(new CommonViewModel(el));
-                        counter++;
-                    });
-                });
-
-                this._managerService.onServerAnswerEvent.next(tableItems);
-                this._managerService.onCounterEvent.next(counter);
-            });
+        this._resours.getDataFromResourses(this.controls, this.inputForm.controls.inputControl.value);
 
         this._storage.setHistoryToLocalStorage(this.inputForm.controls.inputControl.value, this.controls);
+
         this._managerService.onSearchEvent.next(this.inputForm.controls.inputControl.value);
 
-    }
-
-    public getArrayOfObservables(filter: ControlsViewModel, input: string): Observable<ParentResourseModel[]>[] {
-
-        let arrOfObservables: Observable<ParentResourseModel[]>[] = [];
-
-        if (filter) {
-            if (filter.wikiControl) {
-                arrOfObservables.push(this._resours.getWikiData(input));
-            }
-            if (filter.gitControl) {
-                if (filter.repositoriesControl) {
-                    /**
-                     * репозиторий 
-                     */
-                    arrOfObservables.push(this._resours.getGitRepositories(input));
-                }
-                if (filter.usersControl) {
-                    /**
-                     * запрос на юзера 
-                     */
-                    arrOfObservables.push(this._resours.getGitUsers(input));
-                }
-            }
-            if (filter.twitchControl) {
-                if (filter.categoriesControl) {
-                    /**
-                     * категории
-                     */
-                    arrOfObservables.push(this._resours.getTwitchCategories(input));
-                }
-                if (filter.chanelsControl) {
-                    /**
-                     * каналы
-                     */
-                    arrOfObservables.push(this._resours.getTwitchChannels(input));
-                }
-            }
-
-        }
-
-        return arrOfObservables;
     }
 
     public getValueCheckboxes(): void {

@@ -1,12 +1,10 @@
-import { IWikiData } from "../../../environments/interface";
-import { ParentResourseModel } from "../parent-resourse.model";
+import { IWikiData } from '../../../environments/interface';
 
-export class WikiModel extends ParentResourseModel {
+export class WikiModel {
     public snippet!: string;
     public title!: string;
 
     constructor(data: IWikiData) {
-        super();
         if (data) {
             this.snippet = this.creteText(data.snippet);
             this.title = data.title;

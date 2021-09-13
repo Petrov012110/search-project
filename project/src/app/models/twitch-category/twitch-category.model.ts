@@ -1,13 +1,13 @@
 import { ITwitchData } from "../../../environments/interface";
-import { ParentResourseModel } from "../parent-resourse.model";
 
-export class TwitchCategoryModel extends ParentResourseModel {
+export class TwitchCategoryModel {
 
     public boxArtUrl!: string;
     public id!: string;
+    public name!: string;
 
     constructor(data: ITwitchData) {
-        super();
+
         if (data) {
             this.boxArtUrl = data.box_art_url;
             this.id = data.id;

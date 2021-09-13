@@ -34,7 +34,7 @@ export class ErrorComponent implements OnInit {
     }
 
     public closeError(): void {
-        this.errorMessage = null
+        this.errorMessage = null;
     }
 
 

@@ -1,7 +1,7 @@
 import { ControlsViewModel } from "./controls.view-model";
 
 export class HistoryItemViewModel {
-    
+
     public input!: string;
     public date!: number;
     public controls?: ControlsViewModel;
@@ -13,6 +13,6 @@ export class HistoryItemViewModel {
             this.date = new Date().getTime();
             this.controls = controls;
         }
-        
+
     }
 }

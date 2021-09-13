@@ -1,4 +1,4 @@
-export enum EControls {
+export enum ControlsEnum {
     gitControl = 'gitControl',
     gitRepositoryControl = 'gitRepositoryControl',
     gitUserControl = 'gitUserControl',

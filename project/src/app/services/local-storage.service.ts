@@ -25,14 +25,11 @@ export class LocalStorageService {
 
     public getHistoryControls(objectHistoryItem: HistoryItemViewModel): ControlsViewModel {
 
-        let arrayOfControlsFromHistory: Array<HistoryItemViewModel> = JSON.parse(localStorage.getItem('searchHistory') || '[]');
-        
+        const arrayOfControlsFromHistory: Array<HistoryItemViewModel> = JSON.parse(localStorage.getItem('searchHistory') || '[]');
         arrayOfControlsFromHistory.forEach(item => {
-            if (item.input === objectHistoryItem.input  && item.controls && item.date == objectHistoryItem.date) {
-               
+            if (item.input === objectHistoryItem.input  && item.controls && item.date === objectHistoryItem.date) {
                 this.controls = item.controls;
-                
-            } 
+            }
         });
 
         return this.controls;

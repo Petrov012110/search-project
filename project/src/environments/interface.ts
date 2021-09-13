@@ -206,10 +206,10 @@ export type TResourseData = {
     wiki: IWikiData[]
 }
 
-export interface ITable {
-    name?: string,
-    content?: string,
-    resourse?: string
+export interface ICommonViewModel {
+    name: string;
+    content: string;
+    resourse: string;
 }
 
 export enum ResoureseOfResponse {

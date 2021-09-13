@@ -12,7 +12,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     }
 
     public handleError(error: any): void {
-        
+
         this._ngZone.run(() => {
             if (error instanceof HttpErrorResponse) {
 

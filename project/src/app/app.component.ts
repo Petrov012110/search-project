@@ -9,13 +9,13 @@ export class AppComponent {
 
   public bntStyle = 'show-history';
 
-  constructor() { 
-    
+  constructor() {
+
   }
 
   public showHistory(): void {
 
-    if (this.bntStyle == 'show-history') {
+    if (this.bntStyle === 'show-history') {
       this.bntStyle = 'hide-history';
     } else {
       this.bntStyle = 'show-history';

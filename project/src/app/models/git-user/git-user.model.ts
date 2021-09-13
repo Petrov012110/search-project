@@ -1,7 +1,6 @@
 import { IGitUserData } from "../../../environments/interface";
-import { ParentResourseModel } from "../parent-resourse.model";
 
-export class GitUserModel extends ParentResourseModel {
+export class GitUserModel {
 
     public login!: string;
     public avatarUrl!: string;
@@ -9,7 +8,6 @@ export class GitUserModel extends ParentResourseModel {
 
 
     constructor(data: IGitUserData) {
-        super();
         if (data) {
             this.url = data.url;
             this.login = data.login;

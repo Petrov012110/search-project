@@ -27,7 +27,7 @@
                     <div *ngFor="let el of item.children">
                         <label *ngIf="el.name == 'Category' " class="inner-checkbox">
                             <input [attr.disabled]="true" formControlName="twitchCategoryControl" type="checkbox"  />
-                            {{el.name}} Ошибка!
+                            {{el.name}} (Ошибка!)
                         </label>
                         <label *ngIf="el.name == 'Chanels' " class="inner-checkbox">
                             <input [attr.disabled]="true" formControlName="twitchChanelControl" type="checkbox"  />
